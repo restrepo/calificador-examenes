@@ -62,8 +62,10 @@ repositorio:
   de estudiantes, notas, listas de nombres, correos ni números de
   identificación. `.gitignore` bloquea los formatos habituales; si algo así
   aparece en `git status`, no lo agregues.
-- El repositorio guarda exámenes con soluciones: mantenlo **privado**. Los
-  estudiantes no lo necesitan; usan el enlace `#estudiante` del artefacto.
+- El repositorio es **público** y guarda exámenes con sus soluciones. No subas
+  un examen antes de que se aplique: trabájalo en Overleaf o en local y haz
+  push cuando ya se haya presentado (incluido el supletorio). Si el profesor
+  pide subirlo antes, recuérdaselo una vez.
 
 ## Convenciones del curso
 
@@ -89,5 +91,5 @@ repositorio:
 - Si cambió `calificador-parcial`, copia la carpeta a `claude-kit/skills/calificador-parcial/`
   del repositorio público `restrepo/fundamentacion_en_fisica` y reempaquétala allí
   (`python3 -B claude-kit/empaquetar_skills.py`): es la copia de respaldo para los
-  chats sin acceso a este repositorio privado.
+  chats que no pueden clonar este repositorio.
 - Nada de `__pycache__` en el repositorio (usa `python3 -B`).

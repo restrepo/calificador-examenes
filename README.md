@@ -64,8 +64,9 @@ Requisitos para construir y verificar: Python 3, `npm` (descarga KaTeX
 ## Privacidad
 
 Aquí no se suben fotos de exámenes resueltos, notas, nombres, correos ni
-números de identificación de estudiantes. Como el repositorio guarda las
-soluciones de los exámenes, debe ser **privado**.
+números de identificación de estudiantes. El repositorio es público y guarda
+los exámenes con sus soluciones, así que cada examen se sube **después** de
+aplicarlo.
 
 ## Relacionado
 
