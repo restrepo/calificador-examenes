@@ -86,4 +86,8 @@ repositorio:
   python3 -B scripts/empaquetar_skills.py
   ```
   Deja los `.skill` y `dist/skills-calificador-examenes.zip` en `dist/`.
+- Si cambió `calificador-parcial`, copia la carpeta a `claude-kit/skills/calificador-parcial/`
+  del repositorio público `restrepo/fundamentacion_en_fisica` y reempaquétala allí
+  (`python3 -B claude-kit/empaquetar_skills.py`): es la copia de respaldo para los
+  chats sin acceso a este repositorio privado.
 - Nada de `__pycache__` en el repositorio (usa `python3 -B`).
