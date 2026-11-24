@@ -1,0 +1,28 @@
+# Datos de estudiantes: nunca se suben
+*.jpg
+*.jpeg
+*.png
+*.heic
+*.webp
+*.csv
+*.xlsx
+*.xls
+notas*
+respuestas*
+fotos/
+entregas/
+estudiantes/
+
+# Calificadores construidos (se publican como artefacto)
+calificador*.html
+
+# LaTeX y Python
+*.aux
+*.log
+*.out
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.pdf
+__pycache__/
+*.pyc

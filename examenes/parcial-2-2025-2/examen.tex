@@ -1,0 +1,513 @@
+\documentclass[12pt, a4paper]{article}
+
+% PAQUETES BÁSICOS
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath, amssymb} % Para matemáticas avanzadas y símbolos
+\usepackage{graphicx}       % Para incluir imágenes
+\usepackage[margin=2.cm]{geometry} % Control de márgenes
+\usepackage{siunitx}
+\usepackage{cancel}
+
+% PAQUETES DE FORMATO
+\usepackage{enumitem}       % Para personalizar listas
+\usepackage{sectsty}        % Para dar estilo a los títulos de sección
+\usepackage{amsfonts}       % Para fuentes matemáticas
+\usepackage{tikz}           % Para dibujar gráficos y diagramas
+\usetikzlibrary{babel, patterns}
+\usepackage{longtable}
+\usepackage[nomessages]{fp}
+
+\usepackage{comment}
+\includecomment{solution}
+\includecomment{comment}
+\specialcomment{solution}
+{\begingroup \textbf{Solución: }}{\textbf{} \medskip \endgroup}
+% Para obtener solución comente y descomente las siguientes dos y una líneas
+\excludecomment{solution}
+\excludecomment{comment}
+\renewcommand{\phantom}[1]{#1}
+
+% CONFIGURACIONES
+\pagestyle{empty} % Quitar números de página
+\sectionfont{\centering\large\bfseries} % Centrar los títulos de sección
+\subsectionfont{\normalfont\bfseries}
+
+% Definición para vectores unitarios (i, j, k con sombrero)
+\newcommand{\ihat}{\hat{\imath}}
+\newcommand{\jhat}{\hat{\jmath}}
+\newcommand{\khat}{\hat{k}}
+\renewcommand{\arraystretch}{1.9}
+
+\begin{document}
+
+\vspace*{-2cm}
+Nombre:$\underline{\hspace{8.5cm}}$ Identificación: \hrulefill
+
+\quad
+
+% --- PARTE 1 ---
+%\section*{PARTE 1 [75\%]}
+
+
+\begin{enumerate}
+
+% ===== Problemas seleccionados para el parcial (en este orden) =====
+\item\label{item:luna} (I) Un astronauta en la Luna lanza una pluma horizontalmente. Al mismo tiempo y desde la misma altura, deja caer un martillo. Despreciando la insignificante atmósfera lunar, ¿cuál de los siguientes enunciados describe correctamente la aceleración de los dos objetos justo después de ser soltados?
+\begin{enumerate}
+    \item La aceleración del martillo es mayor que la de la pluma.
+ \item La aceleración de la pluma es mayor que la del martillo.
+\item Ambos objetos tienen la misma aceleración distinta de cero.
+\item Ambos objetos tienen aceleración cero.
+\end{enumerate}
+
+(II) ¿Cuál de los dos objetos llega primero al suelo?
+
+\vspace{4cm}
+
+\begin{solution}
+(I) c). Sin aire, la única fuerza es el peso, y por la ley de la fuerza la aceleración es $g_{\text{Luna}}\approx\qty{1.6}{\m/\s^2}$ hacia abajo para los dos, sin importar la masa ni la velocidad horizontal.
+
+(II) Llegan al mismo tiempo. El movimiento vertical de los dos es idéntico: parten de la misma altura con velocidad vertical cero y la misma aceleración. La velocidad horizontal de la pluma solo la hace caer más lejos, no más tarde.
+\end{solution}
+
+
+\vspace{1cm}
+\item\label{item:patinadores} Dos patinadores, de masas $m_1=\qty{50}{\kilo\g}$ y $m_2=\qty{75}{\kilo\g}$, están en reposo sobre el hielo y se empujan. Si el primero sale con una velocidad de $\qty{3}{\m/\s}$ hacia la derecha, use la conservación de la cantidad de movimiento para hallar la velocidad del segundo.
+
+\begin{solution}
+\begin{align}
+    0 =& m_1 v_1 + m_2 v_2\nonumber\\
+    v_2 =& -\frac{m_1}{m_2}\,v_1 = -\frac{50}{75}\times\qty{3}{\m/\s} = \qty{-2}{\m/\s}\,,
+\end{align}
+es decir, $\qty{2}{\m/\s}$ hacia la izquierda: el más pesado sale más despacio. Las fuerzas que se hicieron son iguales y opuestas (acción y reacción).
+\end{solution}
+
+
+\newpage
+\item\label{item:montana} Un carro de una montaña rusa parte del reposo en el punto $A$, a $\qty{20}{\m}$ de altura, y recorre la vía de la figura. Desprecie toda fricción y tome $g=\qty{9.8}{\m/\s^2}$.
+
+\begin{center}
+\begin{tikzpicture}[x=0.95cm,y=0.95cm,>=stealth]
+    % suelo
+    \fill[pattern=north east lines, pattern color=gray!60] (-1.2,-0.25) rectangle (11.6,0);
+    \draw[thick] (-1.2,0) -- (11.6,0);
+    % vía
+    \draw[very thick] (-1.1,4) -- (0,4) to[out=0,in=180] (3,0.08) to[out=0,in=180] (6,2.4)
+        to[out=0,in=180] (8.5,1) to[out=0,in=180] (11,4.4) -- (11.5,4.4);
+    % alturas
+    \foreach \x/\y/\p/\h in {0/4/A/{20}, 6/2.4/C/{12}, 11/4.4/E/{22}} {
+        \draw[dashed, gray] (\x,0) -- (\x,\y);
+        \fill (\x,\y) circle (1.6pt);
+        \node[above] at (\x,\y+0.05) {$\p$};
+        \node[right, font=\small] at (\x,\y/2) {$\qty{\h}{\m}$};
+    }
+    \fill (3,0.08) circle (1.6pt);
+    \node[below] at (3,-0.25) {$B$ ($h=0$)};
+    % carro en A
+    \draw[fill=gray!25, rounded corners=1pt] (-0.95,4.12) rectangle (-0.25,4.45);
+    \fill (-0.8,4.06) circle (1.3pt) (-0.4,4.06) circle (1.3pt);
+\end{tikzpicture}
+\end{center}
+
+\begin{enumerate}
+    \item Calcule la rapidez del carro en $B$, el punto más bajo, y en la cima $C$.
+    \item ¿Llega el carro hasta $E$, a $\qty{22}{\m}$? ¿Cuál es la altura máxima que puede tener una colina para que el carro la supere?
+    \item ¿Cambian las respuestas anteriores si el carro va lleno y tiene el doble de masa? Explique.
+\end{enumerate}
+
+\begin{solution}
+Sin fricción se conserva la energía mecánica: $\frac{1}{2}\cancel{m}v^2+\cancel{m}gh=\cancel{m}gh_A$, de donde
+\begin{align}
+    v=\sqrt{2g\,(h_A-h)}\,.
+\end{align}
+\begin{enumerate}
+    \item $v_B=\sqrt{2(9.8)(20)}\,\unit{\m/\s}\approx\qty{19.8}{\m/\s}$ y $v_C=\sqrt{2(9.8)(20-12)}\,\unit{\m/\s}\approx\qty{12.5}{\m/\s}$.
+    \item No: para llegar a $E$ necesitaría $mg\,(\qty{22}{\m})$, más que toda la energía que tiene, $mg\,(\qty{20}{\m})$. Se detiene a $\qty{20}{\m}$ de altura y regresa. Cualquier colina más baja que $\qty{20}{\m}$ (la altura de partida) se supera; una de exactamente $\qty{20}{\m}$ se alcanza con rapidez cero.
+    \item No: la masa se cancela, así que la rapidez en cada punto depende solo de la diferencia de altura con $A$, no de la masa ni de la forma de la vía.
+\end{enumerate}
+\end{solution}
+
+\newpage
+\item\label{item:rebote} Una pelota de $\qty{0.5}{\kilo\g}$ se suelta desde el reposo a $\qty{10}{\m}$ de altura, rebota en el suelo y sube hasta $\qty{8}{\m}$. Desprecie la fricción con el aire y tome $g=\qty{10}{\m/\s^2}$.
+\begin{enumerate}
+    \item Calcule la energía mecánica de la pelota al soltarla y en el punto más alto después del rebote. ¿Cuánta energía se perdió en el rebote y qué porcentaje es de la inicial?
+    \item Calcule la rapidez de la pelota justo antes y justo después de tocar el suelo.
+    \item ¿En qué se transformó la energía perdida?
+\end{enumerate}
+
+\begin{solution}
+\begin{enumerate}
+    \item En los puntos más altos la pelota está quieta, así que toda la energía es potencial:
+    \begin{align}
+        E_i =& mgh_i = (0.5)(10)(10)\,\unit{\joule} = \qty{50}{\joule}\,,\nonumber\\
+        E_f =& mgh_f = (0.5)(10)(8)\,\unit{\joule} = \qty{40}{\joule}\,,\nonumber\\
+        \Delta E =& E_f - E_i = mg\,(h_f - h_i) = \qty{-10}{\joule}\,.
+    \end{align}
+    Se perdieron $\qty{10}{\joule}$, es decir, $\dfrac{h_i - h_f}{h_i} = \dfrac{2}{10} = \qty{20}{\percent}$ de la energía inicial; el porcentaje no depende de la masa.
+    \item Con $v=\sqrt{2gh}$:
+    \begin{align}
+        v_{\text{antes}} =& \sqrt{2(10)(10)}\,\unit{\m/\s} \approx \qty{14.1}{\m/\s}\,, &
+        v_{\text{después}} =& \sqrt{2(10)(8)}\,\unit{\m/\s} \approx \qty{12.6}{\m/\s}\,.
+    \end{align}
+    \item En calor (la pelota y el suelo se calientan un poco), en sonido y en la deformación de la pelota durante el choque. La energía total se conserva, pero la energía mecánica no: el choque con el suelo no es elástico.
+\end{enumerate}
+\end{solution}
+
+\newpage
+\item\label{item:escape}
+\begin{enumerate}
+    \item ¿A qué radio, $R$, debería estar comprimida toda la masa de la Tierra, $M\approx \qty{5.97e24}{\kilo\g}$, para que la velocidad de escape sea igual a la velocidad de la luz, $c=\qty{3e8}{m/s}$? Tenga en cuenta que la velocidad de escape desde la superficie de una esfera de radio $R$ y masa $M$ es
+\begin{align*}
+    v_{\text{escape}} = \sqrt{\frac{2 G M}{R}}\,,
+\end{align*}
+donde $G=\qty{6.67e-11}{{N\cdot m^2}/{kg^2}}$.
+
+\begin{comment}
+\item Teniendo en cuenta que la velocidad orbital a una distancia $R_{\text{orbital}}$ desde el centro de dicho objeto es
+\begin{align*}
+    v_{\text{orbital}} = \sqrt{\frac{G M}{R_{\text{orbital}}}}\,,
+\end{align*}
+¿A qué distancia $R_{\text{orbital}}$, en términos de $R$, se puede obtener que la velocidad orbital sea la velocidad de la luz?. Basado en la respuesta,  determine si dicha órbita podría existir.
+\end{comment}
+\end{enumerate}
+
+\vspace{6cm}
+
+\begin{solution}
+a)
+\begin{align*}
+    c^2 =& \frac{2GM}{R}\\
+    R =& \frac{2GM}{c^2} = \frac{2\times\num{6.67e-11}\times\num{5.97e24}}{(\num{3e8})^2}\,\unit{\m} \approx \qty{8.9e-3}{\m}\,,
+\end{align*}
+es decir, unos $\qty{9}{\mm}$: toda la Tierra comprimida en una canica sería un agujero negro.
+
+\begin{comment}
+b)
+\begin{align*}
+    \frac{2}{R} =&\frac{1}{R_{\text{orbital}}}\\
+    R_{\text{orbital}} =& \frac{R}{2}
+\end{align*}
+Cómo la velocidad orbital es menor que la velocidad de escape, una velocidad orbital debe ser menor que la velocidad de la luz y así una órbita con la velocidad de la luz no puede existir. Asombrosamente en relatividad general si puede existir.
+
+\subsubsection*{Paradoja Relativista: Cuando Orbitar es más Difícil que Escapar}
+
+En la física clásica de Newton, existe una regla inquebrantable que derivamos algebraicamente en la Ecuación (3.163): la velocidad de escape siempre es mayor que la velocidad orbital por un factor exacto de $\sqrt{2}$. 
+\begin{equation}
+    v_{\text{orb}} = \frac{v_{\text{esc}}}{\sqrt{2}} \approx 0.707 \, v_{\text{esc}}.
+\end{equation}
+El sentido común clásico nos dice que siempre es ``más fácil'' (requiere menos velocidad) quedarse dando vueltas en círculo alrededor de un planeta que escapar de su gravedad para siempre.
+
+Sin embargo, en las cercanías de un agujero negro, la Relatividad General rompe esta regla por completo. En la Esfera de Fotones ($r = 1.5 R_s$), la velocidad orbital es la velocidad de la luz ($v_{\text{orb}} = c$). ¡Pero la velocidad necesaria para escapar radialmente desde esa misma distancia es de solo unos $0.816 c$! 
+Es decir, cerca de un agujero negro, \textbf{la velocidad orbital es mayor que la velocidad de escape}. 
+
+¿Cómo es esto físicamente posible sin entrar en la matemática tensorial? Se puede entender conceptualizando dos fenómenos puramente relativistas:
+
+\paragraph{1. La Trampa de la Energía ($E=mc^2$)}
+En la física de Newton, si quieres evitar caer hacia el centro, simplemente aceleras. Al ir más rápido, la ``fuerza centrífuga'' te empuja hacia afuera. 
+
+Pero Einstein demostró que la masa y la energía son la misma cosa ($E=\gamma m c^2$). Cuando un objeto viaja a velocidades extremas (como $0.8c$ o $0.9c$), adquiere una inmensa cantidad de energía cinética. Dado que toda energía curva el espaciotiempo, \textbf{la inmensa energía cinética del objeto aumenta la atracción gravitacional que el agujero negro ejerce sobre él}. 
+
+Llega un punto, exactamente en $r = 1.5 R_s$, donde el intento de ir más rápido para generar fuerza centrífuga te condena: la energía extra que adquieres aumenta tanto tu interacción gravitacional que el efecto se invierte. En lugar de empujarte hacia afuera, el exceso de velocidad te arrastra más fuerte hacia adentro. Por eso necesitas la máxima velocidad del universo ($c$) solo para lograr mantener el equilibrio.
+
+\paragraph{2. La Geometría del Embudo}
+Imagina el espaciotiempo alrededor del agujero negro no como un espacio plano, sino como un embudo de paredes extremadamente empinadas y resbaladizas. 
+\begin{itemize}
+    \item \textbf{Escapar} equivale a apuntar la nariz de tu nave directamente hacia arriba (escapar radialmente) y encender los motores al máximo. Tienes que luchar contra la gravedad, pero tu camino es directo hacia la salida.
+    \item \textbf{Orbitar} equivale a intentar conducir un automóvil por la pared vertical de ese embudo. Para no resbalar y caer al fondo, tienes que ir a una velocidad tangencial absurdamente alta. 
+\end{itemize}
+
+A $1.5$ veces el Radio de Schwarzschild, la pared del ``embudo'' es tan empinada que solo la luz es lo suficientemente rápida para correr por la pared sin caer. Sin embargo, si apuntaras un rayo de luz verticalmente hacia arriba desde esa misma posición, escaparía sin problemas al infinito (con su luz corrida hacia el rojo).
+
+\textbf{Conclusión:}
+La Relatividad General nos enseña que el espacio y el tiempo son maleables. Cerca de un objeto hipermasivo, el espacio está tan deformado que el concepto clásico de ``fuerza centrífuga'' nos traiciona. Este es el límite absoluto de la Dinámica Newtoniana que hemos estudiado: a partir de aquí, la inercia ya no te protege de la gravedad, sino que se convierte en tu propio peso.
+\end{comment}
+\end{solution}
+
+
+\item\label{item:camion} (I) Un carro pequeño choca de frente contra un camión pesado. Durante el choque, ¿cuál de los siguientes enunciados es correcto?
+\begin{enumerate}
+    \item La fuerza del camión sobre el carro es mayor que la fuerza del carro sobre el camión.
+    \item La fuerza del carro sobre el camión es mayor que la fuerza del camión sobre el carro.
+    \item Las dos fuerzas tienen la misma magnitud y direcciones opuestas.
+    \item Depende de cuál de los dos vehículos iba más rápido.
+\end{enumerate}
+
+(II) ¿Cuál de los dos vehículos sufre el mayor cambio de velocidad? Justifique con la ley de la fuerza, $\boldsymbol{F}=\Delta\boldsymbol{p}/\Delta t$.
+
+\begin{solution}
+(I) c). Por acción y reacción, las fuerzas que se hacen dos cuerpos son iguales en magnitud y opuestas, sin importar sus masas ni sus velocidades.
+
+(II) Las dos fuerzas actúan durante el mismo tiempo $\Delta t$, así que los dos vehículos tienen el mismo $\lvert\Delta \boldsymbol{p}\rvert = F\,\Delta t$, es decir, $m_{\text{carro}}\lvert\Delta \boldsymbol{v}_{\text{carro}}\rvert = m_{\text{camión}}\lvert\Delta \boldsymbol{v}_{\text{camión}}\rvert$. Como el carro tiene mucha menos masa, su cambio de velocidad es mucho mayor: por eso es el más afectado.
+\end{solution}
+
+% ===== Banco de problemas no seleccionados: comentados =====
+\begin{comment}
+\item\label{item:hmax} Para el movimiento parabólico con un ángulo de lanzamiento $\theta$, y despreciando la fricción con el aire, calcule:
+\begin{enumerate}
+    \item La energía mecánica inicial al momento del lanzamiento, con el cuadrado de la magnitud de la velocidad inicial expresada en términos de sus componentes $x$ y $y$:
+    \begin{align*}
+        v_0^2 = v_{0x}^2+ v_{0y}^2\,.
+    \end{align*}
+    \item La energía mecánica en el punto de máxima altura, $h_{\text{max}}$, con la magnitud de la velocidad expresada en términos de sus componentes diferentes de cero
+    \item Igualando la energía inicial con la energía  en el punto de máxima altura, demuestre que
+    \begin{align*}
+        h_{\text{max}}=&\frac{v_{0}^2\sin^2\theta}{2g}\,.
+    \end{align*}
+\end{enumerate}
+
+\begin{solution}
+\begin{enumerate}
+    \item 
+    \begin{align}
+    E_i=&\frac{1}{2}m v_0^2\nonumber\\
+    =&\frac{1}{2}mv_{0x}^2+ \frac{1}{2}mv_{0y}^2\,.
+    \end{align}
+    \item 
+    \begin{align}
+        E_f = \frac{1}{2}m v_{0x}^2+mgh
+    \end{align}
+    \item 
+    \begin{align}
+        E_i=& E_f\nonumber\\
+   \cancel{ \frac{1}{2}mv_{0x}^2}+ \frac{1}{2}mv_{0y}^2 =& \cancel{\frac{1}{2}m v_{0x}^2}+mgh_{\text{max}}\nonumber\\
+    \frac{1}{2}\cancel{m}v_{0y}^2 =& \cancel{m}g h_{\text{max}}\nonumber\\
+    \end{align}
+    de modo que
+    \begin{align}
+        h_{\text{max}} =& \frac{v_{0y}^2}{2g}\nonumber\\
+        h_{\text{max}}=&\frac{v_{0}^2\sin^2\theta}{2g}\,.
+    \end{align}
+    
+\end{enumerate}
+
+\end{solution}
+
+\newpage
+\item\label{item:tabla} Considere el movimiento en pasos de $\Delta t = \qty{1}{\s}$, de un objeto sometido a una fuerza del tipo
+\begin{align}
+    F = - x\,,
+\end{align}
+donde $x$ es la posición de un objeto de masa $m=\qty{1}{\kilo\g}$, en un momento dado $t$.  En el paso 0), comenzando en $t=0$, el objeto parte de la posición \emph{inicial} $x=\qty{1}{m}$ y en reposo (con cantidad de movimiento \emph{inicial} $p = 0$). En el paso 1), en $t=1$, se calcula la \emph{nueva} cantidad de movimiento $p= \qty{-1}{\kilo\g\cdot\m/s}$ y la \emph{nueva} posición, $x=\qty{0}{\m}$, como se muestra en la tabla que continua en la página siguiente. \textbf{Complete los siguientes pasos en las dos páginas de la tabla hasta retornar a las condiciones \emph{iniciales} }
+
+
+
+ \begin{longtable}{l|c|l|l|l}
+   \textbf{Paso} & \textbf{Ecuación}  &  $t \, [\unit{\s}]$ & $x\, [\unit{\m}]$ & $p\, [\unit{\kilo\g\cdot\m/\s}]$ \\\hline
+0) & Condición inicial & $0$ & $1$ & $0$ \\\hline
+1) & \begin{minipage}[t]{0.45\textwidth}
+    \[\begin{aligned}
+        p &= F\Delta t + p \\
+          &= -x +p  \\
+          &= -1 +0 \\ 
+          &= -1 \\
+        x & = (p/m)\Delta t + x\\
+          & = p + x\\
+          & = -1 + 1\\
+          & = 0
+    \end{aligned}\]
+    \end{minipage}    
+                  & $1$    & $0$ & $-1$  \\\hline
+2) & \begin{minipage}[t]{0.45\textwidth}
+    \[\begin{aligned}
+        p &= -x +p  \\
+          &=\phantom{0-1} \\ 
+          &=\phantom{-1} \\
+        x & = p + x\\
+          & =\phantom{-1+0}\\
+          & =\phantom{-1} 
+    \end{aligned}\]
+    \end{minipage}    
+                  & $\phantom{2}$    & $\phantom{-1}$ & $\phantom{-1}$  \\\hline
+3) & \begin{minipage}[t]{0.45\textwidth}
+    \[\begin{aligned}
+        p &= -x +p  \\
+          &=\phantom{1-1} \\ 
+          &=\phantom{0} \\
+        x & = p + x\\
+          & =\phantom{0-1}\\
+          & =\phantom{-1} 
+    \end{aligned}\]
+    \end{minipage}    
+                  & $\phantom{3}$    & $\phantom{-1}$ & $\phantom{0}$  \\\hline
+4) & \begin{minipage}[t]{0.45\textwidth}
+    \[\begin{aligned}
+        p &= -x +p  \\
+          &=\phantom{1+0} \\ 
+          &=\phantom{1} \\
+        x & = p + x\\
+          & =\phantom{1-1}\\
+          & =\phantom{0} 
+    \end{aligned}\]
+    \end{minipage}    
+                  & $\phantom{4}$    & $\phantom{0}$ & $\phantom{1}$  \\\hline
+5) & \begin{minipage}[t]{0.45\textwidth}
+    \[\begin{aligned}
+        p &= -x +p  \\
+          &=\phantom{0+1} \\ 
+          &=\phantom{1} \\
+        x & = p + x\\
+          & =\phantom{1+0}\\
+          & =\phantom{1} 
+    \end{aligned}\]
+    \end{minipage}    
+                  & $\phantom{5}$    & $\phantom{1}$ & $\phantom{1}$  \\\hline
+6) & \begin{minipage}[t]{0.45\textwidth}
+    \[\begin{aligned}
+        p &= -x +p  \\
+          &=\phantom{-1+1} \\ 
+          &=\phantom{0} \\
+        x & = p + x\\
+          & =\phantom{0+1}\\
+          & =\phantom{1} 
+    \end{aligned}\]
+    \end{minipage}    
+                  & $\phantom{6}$    & $\phantom{1}$ & $\phantom{0}$  \\\hline
+\end{longtable}
+
+\newpage
+\item\label{item:grafica} Grafique los puntos obtenidos en el plano con ejes $t$ y $x$ e intente determinar que tipo de movimiento realiza el objeto si el movimiento continua sin interrupción.
+
+\begin{solution}
+Los puntos $(t,x)$ son $(0,1)$, $(1,0)$, $(2,-1)$, $(3,-1)$, $(4,0)$, $(5,1)$ y $(6,1)$: en $t=\qty{6}{\s}$ el objeto vuelve a $x=\qty{1}{\m}$ con $p=0$, las condiciones iniciales. A partir de ahí los pasos se repiten, así que el movimiento es una \textbf{oscilación periódica} alrededor de $x=0$, entre $x=\qty{1}{\m}$ y $x=\qty{-1}{\m}$, con un período de unos $\qty{6}{\s}$. Es el movimiento de una masa en un resorte ideal (oscilador armónico), cuyo período exacto es $T=2\pi\sqrt{m/k}=2\pi\,\unit{\s}\approx\qty{6.28}{\s}$; la diferencia se debe al paso grande $\Delta t=\qty{1}{\s}$.
+\end{solution}
+
+\newpage
+\item\label{item:choque} Un carro de masa $m_1$ que se mueve con rapidez $v$ choca contra un carro de masa $m_2$ que está en reposo, y los dos quedan pegados.
+\begin{enumerate}
+    \item Escriba la conservación de la cantidad de movimiento antes y después del choque y despeje la rapidez final $v_f$ de los dos carros juntos.
+    \item Demuestre que la energía cinética final es
+    \begin{align*}
+        K_f = \frac{m_1}{m_1+m_2}\,K_i\,,
+    \end{align*}
+    donde $K_i=\frac{1}{2}m_1v^2$ es la energía cinética inicial.
+    \item Si $m_1=\qty{1000}{\kilo\g}$, $m_2=\qty{1500}{\kilo\g}$ y $v=\qty{20}{\m/\s}$, calcule $v_f$ y el porcentaje de la energía cinética inicial que se pierde en el choque.
+\end{enumerate}
+
+\begin{solution}
+\begin{enumerate}
+    \item
+    \begin{align}
+        m_1 v + m_2\cdot 0 =& (m_1+m_2)\,v_f\nonumber\\
+        v_f =& \frac{m_1}{m_1+m_2}\,v\,.
+    \end{align}
+    \item
+    \begin{align}
+        K_f =& \frac{1}{2}(m_1+m_2)\,v_f^2
+        = \frac{1}{2}\cancel{(m_1+m_2)}\,\frac{m_1^2}{(m_1+m_2)^{\cancel{2}}}\,v^2\nonumber\\
+        =& \frac{m_1}{m_1+m_2}\left(\frac{1}{2}m_1v^2\right)
+        = \frac{m_1}{m_1+m_2}\,K_i\,.
+    \end{align}
+    \item $v_f = \dfrac{1000}{2500}\times\qty{20}{\m/\s} = \qty{8}{\m/\s}$ y $K_f/K_i = 1000/2500 = 0.4$: se pierde el $\qty{60}{\percent}$ de la energía cinética, que se convierte en deformación, calor y sonido. La cantidad de movimiento sí se conserva.
+\end{enumerate}
+\end{solution}
+
+\newpage
+\item\label{item:frenado} Un carro que va con rapidez $v_0$ frena con las llantas bloqueadas sobre una carretera horizontal. La fuerza de fricción tiene magnitud $f=\mu m g$, donde $\mu$ es el coeficiente de fricción y $m$ la masa del carro.
+\begin{enumerate}
+    \item Igualando el trabajo de la fuerza de fricción, $W=-f\,d$, con el cambio de la energía cinética, demuestre que la distancia de frenado es
+    \begin{align*}
+        d = \frac{v_0^2}{2\mu g}\,.
+    \end{align*}
+    \item ¿La distancia de frenado depende de la masa del carro? Explique con base en la expresión anterior.
+    \item Calcule $d$ para $v_0=\qty{20}{\m/\s}$ ($\qty{72}{\km/\hour}$), $\mu = 0.7$ y $g=\qty{9.8}{\m/\s^2}$. ¿Cuántas veces mayor es la distancia de frenado si la rapidez se duplica?
+\end{enumerate}
+
+\begin{solution}
+\begin{enumerate}
+    \item
+    \begin{align}
+        W =& K_f - K_i\nonumber\\
+        -\mu \cancel{m} g\, d =& 0-\frac{1}{2}\cancel{m}v_0^2\nonumber\\
+        d =& \frac{v_0^2}{2\mu g}\,.
+    \end{align}
+    \item No: la masa se cancela, porque tanto la fuerza de fricción como la energía cinética son proporcionales a $m$.
+    \item $d = \dfrac{(20)^2}{2\times 0.7\times 9.8}\,\unit{\m} \approx \qty{29}{\m}$. Como $d\propto v_0^2$, al duplicar la rapidez la distancia se multiplica por $2^2=4$: $d\approx\qty{117}{\m}$.
+\end{enumerate}
+\end{solution}
+
+\newpage
+\item\label{item:cometa} El cometa Halley se acerca al Sol hasta una distancia $r_p=\qty{0.59}{UA}$ (perihelio), donde su rapidez es $v_p=\qty{54}{\km/\s}$, y se aleja hasta $r_a=\qty{35}{UA}$ (afelio). En el perihelio y en el afelio la velocidad es perpendicular a la posición $\boldsymbol{r}$ medida desde el Sol, de modo que la magnitud del momento angular es $L = m\,r\,v$.
+\begin{enumerate}
+    \item ¿Por qué se conserva el momento angular del cometa respecto al Sol? (Ayuda: ¿cuánto vale el torque $\boldsymbol{\tau}=\boldsymbol{r}\times\boldsymbol{F}$ de una fuerza dirigida hacia el Sol?)
+    \item Igualando el momento angular en el perihelio y en el afelio, despeje la rapidez $v_a$ en el afelio y calcúlela.
+\end{enumerate}
+
+\begin{solution}
+\begin{enumerate}
+    \item La fuerza gravitacional apunta hacia el Sol, es decir, a lo largo de $-\boldsymbol{r}$. Entonces $\boldsymbol{\tau}=\boldsymbol{r}\times\boldsymbol{F}=\boldsymbol{0}$ y, como $\Delta\boldsymbol{L}=\boldsymbol{\tau}\,\Delta t$, el momento angular no cambia.
+    \item
+    \begin{align}
+        \cancel{m}\, r_p v_p =& \cancel{m}\, r_a v_a\nonumber\\
+        v_a =& \frac{r_p}{r_a}\,v_p = \frac{0.59}{35}\times\qty{54}{\km/\s} \approx \qty{0.91}{\km/\s}\,.
+    \end{align}
+    Las unidades astronómicas se cancelan, así que no hace falta convertirlas a metros. El cometa va unas 60 veces más despacio en el afelio: es la segunda ley de Kepler.
+\end{enumerate}
+\end{solution}
+
+\newpage
+\item\label{item:caida} Se suelta una piedra desde el reposo a una altura $h$ sobre el suelo. Despreciando la fricción con el aire:
+\begin{enumerate}
+    \item Igualando la energía mecánica arriba y justo antes de tocar el suelo, demuestre que la rapidez de llegada es $v=\sqrt{2gh}$.
+    \item Calcule $v$ para $h=\qty{20}{\m}$ y $g=\qty{9.8}{\m/\s^2}$.
+\end{enumerate}
+
+\begin{solution}
+\begin{align}
+    0 + \cancel{m}gh =& \frac{1}{2}\cancel{m}v^2 + 0\nonumber\\
+    v =& \sqrt{2gh} = \sqrt{2\times 9.8\times 20}\,\unit{\m/\s} \approx \qty{19.8}{\m/\s}\,.
+\end{align}
+No depende de la masa de la piedra.
+\end{solution}
+
+\newpage
+\item\label{item:rebote-lanzamiento} Una pelota pequeña de caucho pierde en cada rebote el $\qty{20}{\percent}$ de su energía mecánica. Desde una altura $h=\qty{10}{\m}$ se lanza verticalmente con una rapidez $v_0$. Desprecie la fricción con el aire y tome $g=\qty{9.8}{\m/\s^2}$.
+\begin{enumerate}
+    \item ¿Con qué rapidez $v_0$ hay que lanzarla para que, después de rebotar, suba exactamente hasta la altura de partida? Demuestre primero que $v_0=\sqrt{gh/2}$.
+    \item ¿Importa si se lanza hacia arriba o hacia abajo? Explique.
+\end{enumerate}
+
+\begin{solution}
+\begin{enumerate}
+    \item La energía antes del rebote es $E=\frac{1}{2}mv_0^2+mgh$. Después del rebote queda el $\qty{80}{\percent}$, y en el punto más alto, a la altura $h$ y en reposo, toda es potencial:
+    \begin{align}
+        0.8\left(\frac{1}{2}\cancel{m}v_0^2+\cancel{m}gh\right) =& \cancel{m}gh\nonumber\\
+        \frac{1}{2}v_0^2 =& \frac{gh}{0.8}-gh = \frac{gh}{4}\nonumber\\
+        v_0 =& \sqrt{\frac{gh}{2}} = \sqrt{\frac{9.8\times 10}{2}}\,\unit{\m/\s} = \qty{7}{\m/\s}\,.
+    \end{align}
+    La energía cinética del lanzamiento, $\frac{1}{2}mv_0^2=\frac{1}{4}mgh$, repone exactamente lo que se pierde en el rebote: el $\qty{20}{\percent}$ de $\frac{5}{4}mgh$.
+    \item No importa. La energía cinética depende de $v_0^2$, no de la dirección: si se lanza hacia arriba, sube, se detiene y pasa de nuevo por la altura $h$ con la misma rapidez $v_0$ hacia abajo, y llega al suelo con la misma energía.
+\end{enumerate}
+\end{solution}
+
+\newpage
+\item\label{item:impulso} Una pelota de béisbol de $\qty{0.15}{\kilo\g}$ llega al bate con una rapidez de $\qty{40}{\m/\s}$ y sale en la dirección contraria con la misma rapidez. El contacto dura $\Delta t=\qty{2}{\milli\s}$. Calcule la magnitud del cambio en la cantidad de movimiento, $\lvert\Delta p\rvert$, y la fuerza media que hace el bate, usando la ley de la fuerza $F=\Delta p/\Delta t$.
+
+\begin{solution}
+Tomando como positivo el sentido de salida:
+\begin{align}
+    \Delta p =& m v_f - m v_i = (0.15)(40) - (0.15)(-40) = \qty{12}{\kilo\g\cdot\m/\s}\,,\nonumber\\
+    F =& \frac{\Delta p}{\Delta t} = \frac{\qty{12}{\kilo\g\cdot\m/\s}}{\qty{2e-3}{\s}} = \qty{6000}{\N}\,.
+\end{align}
+El cambio de signo de la velocidad duplica el $\Delta p$: no es $mv$ sino $2mv$.
+\end{solution}
+
+\newpage
+\item\label{item:patinadora} (Conceptual) Una patinadora gira sobre la punta de un patín con los brazos extendidos y luego los recoge contra el cuerpo. El torque externo sobre ella es prácticamente cero. ¿Qué pasa con su rapidez de giro?
+\begin{enumerate}
+    \item Disminuye, porque recoger los brazos cuesta energía.
+    \item Aumenta, porque su momento angular se conserva y sus brazos quedan a menor distancia $r$ del eje.
+    \item No cambia, porque no hay torque externo.
+    \item Se detiene, porque desaparece el giro de los brazos.
+\end{enumerate}
+
+\begin{solution}
+b). Sin torque externo el momento angular se conserva. Cada parte de los brazos contribuye con $m\,r\,v$; al reducir $r$, la rapidez $v$ debe aumentar para mantener $L$ constante, así que la patinadora gira más rápido. Es la misma razón por la que un planeta va más rápido en el perihelio.
+\end{solution}
+\end{comment}
+\end{enumerate}
+
+
+
+\end{document}

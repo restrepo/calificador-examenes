@@ -1,0 +1,72 @@
+% =====================================================================
+% Plantilla de examen con banco de problemas y soluciones conmutables.
+%
+% - Cada problema es un \item con \label{item:<nombre>} y su solución en el
+%   entorno solution, justo debajo.
+% - Los problemas que no van en el examen se dejan en el banco, dentro de
+%   \begin{comment} ... \end{comment}.
+% - Para imprimir el examen: deja \excludecomment{solution} (así viene).
+%   Para ver las soluciones: comenta esa línea.
+% - Para mostrar también lo que va dentro de \phantom (tablas que el
+%   estudiante completa), descomente la redefinición de \phantom.
+% =====================================================================
+\documentclass[12pt, a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage[margin=2cm]{geometry}
+\usepackage{siunitx}
+\usepackage{cancel}
+\usepackage{enumitem}
+\usepackage{sectsty}
+\usepackage{tikz}
+\usetikzlibrary{babel, patterns}
+
+% soluciones y banco de problemas
+\usepackage{comment}
+\specialcomment{solution}
+  {\begingroup \textbf{Solución: }}{\medskip \endgroup}
+\excludecomment{solution}   % comente esta línea para ver las soluciones
+\excludecomment{comment}    % banco de problemas que no van en el examen
+% \renewcommand{\phantom}[1]{#1}  % descomente junto con la línea de solution
+                                  % para mostrar lo que va dentro de \phantom
+
+\pagestyle{empty}
+\sectionfont{\centering\large\bfseries}
+
+\begin{document}
+
+\vspace*{-2cm}
+Nombre:$\underline{\hspace{8.5cm}}$ Identificación: \hrulefill
+
+\begin{enumerate}
+
+% ===== Problemas del examen (en este orden) =====
+\item\label{item:ejemplo} Una piedra se suelta desde el reposo a una altura $h=\qty{20}{\m}$. Despreciando la fricción con el aire, calcule la rapidez con que llega al suelo. Tome $g=\qty{9.8}{\m/\s^2}$.
+
+\vspace{4cm}
+
+\begin{solution}
+Por conservación de la energía mecánica,
+\begin{align}
+    \cancel{m}gh = \frac{1}{2}\cancel{m}v^2
+    \;\Longrightarrow\;
+    v = \sqrt{2gh} = \sqrt{2\times 9.8\times 20}\,\unit{\m/\s} \approx \qty{19.8}{\m/\s}\,.
+\end{align}
+\end{solution}
+
+\newpage
+% ===== Banco de problemas no seleccionados =====
+\begin{comment}
+\item\label{item:banco-ejemplo} Problema del banco: no aparece en el examen.
+\begin{solution}
+Solución del problema del banco.
+\end{solution}
+\end{comment}
+
+\end{enumerate}
+
+\end{document}
