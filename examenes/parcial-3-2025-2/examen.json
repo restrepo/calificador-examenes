@@ -1,0 +1,114 @@
+{
+  "curso": "Fundamentación en Física",
+  "codigo": "302133",
+  "institucion": "Universidad de Antioquia",
+  "examen": "Parcial 3",
+  "tema": "electromagnetismo",
+  "paginas": 4,
+  "distribucion": [
+    "problema 1",
+    "problema 2",
+    "problema 3",
+    "problema 4"
+  ],
+  "escala_max": 5,
+  "problemas": [
+    {
+      "n": 1,
+      "titulo": "Diseño de un solenoide",
+      "enunciado": "Diseñe un solenoide de longitud L = 0,5 m que genere en su interior un campo magnético B = 0,02 T usando una corriente I = 5,0 A. ¿Cuántas vueltas N se necesitan como mínimo? Ecuaciones dadas: el campo dentro de un solenoide largo es B = μ0 (N/L) I, con μ0 = 4π × 10^-7 T·m/A.",
+      "solucion": "Despejando N: N = B L/(μ0 I) = (0,02 T)(0,5 m)/[(4π × 10^-7 T·m/A)(5,0 A)] = 1591,5. Como no se puede dar media vuelta y con 1591 vueltas el campo queda un poco por debajo de 0,02 T, el mínimo es N = 1592 vueltas (unas 3183 vueltas por metro). Se acepta 1591 o 1592 si el cálculo está bien.",
+      "partes": [
+        {
+          "id": "1-a",
+          "txt": "Despeja N = B L/(μ0 I) de la ecuación del solenoide y sustituye los datos con unidades coherentes",
+          "max": 12
+        },
+        {
+          "id": "1-b",
+          "txt": "Obtiene N ≈ 1592 vueltas (1591,5 redondeado hacia arriba; se acepta 1591 o 1592)",
+          "max": 13
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "titulo": "Montaña rusa eléctrica",
+      "enunciado": "Una esfera pequeña de masa m = 2,0 g y carga q = +2,0 μC se mueve sin fricción por una vía sobre una mesa horizontal, dentro de un campo eléctrico uniforme E = 5,0 × 10^3 N/C. La figura muestra la vía vista desde arriba, con el campo apuntando hacia abajo en la figura. La esfera parte del reposo en A. Como la mesa es horizontal, el peso no influye. Ecuaciones dadas: la línea de altura cero es la recta punteada que pasa por B; las distancias y se miden desde ella en contra del campo. La energía potencial eléctrica es U = qEy (U = 0 sobre esa línea, versión eléctrica de U = mgh); la energía cinética es K = ½ m v²; sin fricción, K + U se conserva. Datos de la figura: A está a y = 20 cm de la línea de altura cero; B es el punto más bajo de la vía, sobre esa línea (y = 0); C es una cima a y = 12 cm; D es el final de la vía, a y = 22 cm. Preguntas: a) Calcule la energía potencial eléctrica y la energía cinética de la esfera en A. b) Usando la conservación de la energía, calcule la rapidez de la esfera en B y en C. c) ¿Llega la esfera hasta D, a 22 cm? ¿Hasta qué distancia de la línea de altura cero puede llegar? d) Si se repite con una esfera del doble de masa y la misma carga, ¿con qué rapidez llega a B? Explique por qué, a diferencia de la montaña rusa con gravedad, aquí la masa no se cancela.",
+      "solucion": "a) U_A = q E y_A = (2,0 × 10^-6 C)(5,0 × 10^3 N/C)(0,20 m) = 2,0 × 10^-3 J; K_A = 0 porque parte del reposo. b) K + U = U_A: ½ m v² + qEy = qE y_A, así que v = √[(2qE/m)(y_A − y)], con qE/m = 5,0 m/s². v_B = √(2·5,0·0,20) m/s ≈ 1,41 m/s; v_C = √(2·5,0·0,08) m/s ≈ 0,89 m/s. c) No: para llegar a D necesitaría qE(0,22 m), más que toda su energía, qE(0,20 m). Llega hasta 20 cm de la línea de altura cero, se detiene y regresa; no depende de q, m ni E. d) La energía que entrega el campo es la misma, qE y_A = 2,0 × 10^-3 J: ½ (2m) v_B'² = qE y_A, así que v_B' = v_B/√2 = 1,00 m/s. En la montaña rusa la masa se cancela porque el peso mg es proporcional a m; la fuerza eléctrica qE depende de la carga y no de la masa.",
+      "partes": [
+        {
+          "id": "2-a",
+          "txt": "a) U_A = qEy_A = 2,0 × 10^-3 J y K_A = 0",
+          "max": 6
+        },
+        {
+          "id": "2-b",
+          "txt": "b) Plantea K + U = U_A y obtiene v_B ≈ 1,41 m/s y v_C ≈ 0,89 m/s",
+          "max": 9
+        },
+        {
+          "id": "2-c",
+          "txt": "c) No llega a D; llega hasta 20 cm, con justificación por energía",
+          "max": 4
+        },
+        {
+          "id": "2-d",
+          "txt": "d) v_B' = v_B/√2 = 1,00 m/s y explica que qE no depende de m (el peso mg sí)",
+          "max": 6
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "titulo": "La línea roja del hidrógeno",
+      "enunciado": "En el modelo de Bohr, las energías permitidas del electrón en el átomo de hidrógeno son E_n = −13,6 eV/n², n = 1, 2, 3, … Cuando el electrón cae de n = 3 a n = 2, el átomo emite un fotón (la línea roja H_α de Balmer). Ecuaciones dadas: E_fotón = h f y c = λ f, con h = 4,136 × 10^-15 eV·s y c = 3,00 × 10^8 m/s. a) Calcule las energías E_3 y E_2. b) Calcule la energía del fotón emitido, E_fotón = E_3 − E_2. ¿Por qué es positiva? c) Calcule la frecuencia del fotón. d) Calcule su longitud de onda en nanómetros y diga de qué color es la luz. Sugerencia dada en el examen: la luz visible va de unos 380 nm (violeta) a unos 750 nm, y el rojo corresponde a longitudes de onda entre unos 620 nm y 750 nm.",
+      "solucion": "a) E_3 = −13,6 eV/9 ≈ −1,51 eV; E_2 = −13,6 eV/4 = −3,40 eV. b) E_fotón = −1,51 eV − (−3,40 eV) ≈ 1,89 eV. Es positiva porque es la energía que se lleva la luz: el átomo pierde E_2 − E_3 = −1,89 eV y el fotón la gana; la energía de un fotón, hf, siempre es positiva. c) f = E/h = 1,889 eV/(4,136 × 10^-15 eV·s) ≈ 4,57 × 10^14 Hz. d) λ = c/f = (3,00 × 10^8 m/s)/(4,57 × 10^14 Hz) ≈ 6,57 × 10^-7 m = 657 nm: está entre 620 y 750 nm, es luz roja (el valor medido es 656,3 nm).",
+      "partes": [
+        {
+          "id": "3-a",
+          "txt": "a) E_3 ≈ −1,51 eV y E_2 = −3,40 eV",
+          "max": 6
+        },
+        {
+          "id": "3-b",
+          "txt": "b) E_fotón ≈ 1,89 eV y explica por qué es positiva (energía que gana el fotón; el átomo pierde energía)",
+          "max": 7
+        },
+        {
+          "id": "3-c",
+          "txt": "c) f ≈ 4,57 × 10^14 Hz",
+          "max": 6
+        },
+        {
+          "id": "3-d",
+          "txt": "d) λ ≈ 657 nm (se acepta 656–657 nm) y luz roja",
+          "max": 6
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "titulo": "Punto de fuerza nula",
+      "enunciado": "Dos cargas puntuales, q1 = +4,0 μC y q2 = +9,0 μC, están fijas y separadas d = 10 cm. La figura muestra las líneas del campo eléctrico que producen. Se busca el punto, sobre la línea que une las cargas, donde una tercera carga q3 no sentiría ninguna fuerza eléctrica; una recta punteada perpendicular a la línea que une las cargas marca ese punto a una distancia x de q1, entre las dos cargas. Ecuación dada: ley de Coulomb, F = k |q_a q_b|/r², con k = 8,99 × 10^9 N·m²/C². a) Escriba la magnitud de la fuerza que q1 y q2 ejercen sobre q3 cuando está a una distancia x de q1, entre las dos cargas. ¿En qué sentido apunta cada fuerza si q3 es positiva? b) Igualando las dos fuerzas, encuentre x. c) ¿Cambia la respuesta si q3 es negativa o tiene otro valor? Explique.",
+      "solucion": "a) F1 = k q1 q3/x² y F2 = k q2 q3/(d − x)². Si q3 es positiva, las dos son repulsivas: F1 la empuja hacia q2 y F2 hacia q1, por eso entre las cargas pueden anularse. b) k q1 q3/x² = k q2 q3/(d − x)² ⇒ 4/x² = 9/(10 − x)² ⇒ 2/x = 3/(10 − x) ⇒ 2(10 − x) = 3x ⇒ x = 4,0 cm (más cerca de la carga menor). c) No: q3 se cancela en la igualdad. Si q3 es negativa, las dos fuerzas cambian de sentido a la vez y siguen anulándose en el mismo punto: allí el campo eléctrico total es cero.",
+      "partes": [
+        {
+          "id": "4-a",
+          "txt": "a) F1 = k q1 q3/x², F2 = k q2 q3/(d − x)² y los sentidos: F1 hacia q2 y F2 hacia q1 (repulsivas)",
+          "max": 8
+        },
+        {
+          "id": "4-b",
+          "txt": "b) Iguala las fuerzas y obtiene x = 4,0 cm",
+          "max": 12
+        },
+        {
+          "id": "4-c",
+          "txt": "c) No cambia: q3 se cancela; con q3 negativa ambas fuerzas se invierten y se siguen anulando",
+          "max": 5
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,428 @@
+\documentclass[12pt, a4paper]{article}
+
+% PAQUETES BÁSICOS
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath, amssymb} % Para matemáticas avanzadas y símbolos
+\usepackage{graphicx}       % Para incluir imágenes
+\usepackage[margin=2.cm]{geometry} % Control de márgenes
+\usepackage{siunitx}
+\sisetup{per-mode=symbol}
+\usepackage{cancel}
+\usepackage{hyperref}
+
+% PAQUETES DE FORMATO
+\usepackage{enumitem}       % Para personalizar listas
+\usepackage{sectsty}        % Para dar estilo a los títulos de sección
+\usepackage{amsfonts}       % Para fuentes matemáticas
+\usepackage{tikz}           % Para dibujar gráficos y diagramas
+\usetikzlibrary{babel, arrows.meta, decorations.markings}
+\usepackage{longtable}
+\usepackage[nomessages]{fp}
+
+\usepackage{comment}
+\includecomment{solution}
+\includecomment{comment}
+\specialcomment{solution}
+{\begingroup \textbf{Solución: }}{\textbf{} \medskip \endgroup}
+% Para obtener solución comente y descomente las siguientes dos y una líneas
+\excludecomment{solution}
+\excludecomment{comment}
+%\renewcommand{\phantom}[1]{#1}
+
+% CONFIGURACIONES
+\pagestyle{empty} % Quitar números de página
+\sectionfont{\centering\large\bfseries} % Centrar los títulos de sección
+\subsectionfont{\normalfont\bfseries}
+
+% Definición para vectores unitarios (i, j, k con sombrero)
+\newcommand{\ihat}{\hat{\imath}}
+\newcommand{\jhat}{\hat{\jmath}}
+\newcommand{\khat}{\hat{k}}
+\renewcommand{\arraystretch}{1.9}
+
+\begin{document}
+
+\vspace*{-2cm}
+Nombre:$\underline{\hspace{8.5cm}}$ Identificación: \hrulefill
+
+\quad
+
+\begin{enumerate}
+
+% ===== Problemas del examen (en este orden) =====
+\begin{comment}  % problema comentado: radiación en LEP
+\item\label{item:lep} En el mismo túnel circular de $\qty{27}{\kilo\meter}$ donde ahora funciona el LHC acelerando protones, existía antes un acelerador de partículas, llamado LEP, que aceleraba electrones en la correspondiente órbita circular de $\qty{27}{\kilo\meter}$ a una energía de $\qty{100}{\giga\electronvolt}$, de manera que los electrones se movían a una velocidad muy cercana a la velocidad de la luz, $c$. A estas escalas macroscópicas, el electrón sí se puede considerar una partícula y, por lo tanto, está sometido a pérdidas de energía por radiación de ondas electromagnéticas. La fórmula de Larmor para la potencia perdida por radiación, $P$, para una partícula relativista, viene corregida por el factor relativista $\gamma$ como
+\begin{equation}
+    P = \frac{2}{3} \frac{k e^2 a^2}{c^3}\gamma^4\,,
+    \label{eq:larmor}
+\end{equation}
+donde $k$ es la constante de Coulomb, $e$ la carga del electrón, $a$ su aceleración, $c$ la velocidad de la luz y $\gamma$ el factor relativista. Teniendo en cuenta que el electrón, de masa $m_e$, está acelerado a una energía
+\begin{equation}
+    E \approx \gamma m_e c^2
+\end{equation}
+mientras se mueve por el túnel circular a una velocidad muy cercana a la de la luz, use $E=\qty{100}{\giga\electronvolt}$ para despejar $\gamma$. Con la aceleración centrípeta
+\begin{equation}
+    a = \frac{c^2}{R}\,,
+\end{equation}
+donde $R$ es el radio del círculo, calcule la potencia perdida por radiación en el acelerador LEP de $\qty{27}{\kilo\meter}$ de circunferencia. Exprese la respuesta en $\unit{\giga\electronvolt\per\second}$.
+
+Datos: $k=\qty{8.99e9}{\newton\meter\squared\per\coulomb\squared}$, $e=\qty{1.602e-19}{\coulomb}$, $c=\qty{3e8}{\meter\per\second}$, $m_e c^2=\qty{0.511}{\mega\electronvolt}$ y $\qty{1}{\giga\electronvolt}=\qty{1.602e-10}{\joule}$.
+
+\begin{solution}
+\begin{align*}
+    P =  &  \frac{2}{3} \frac{k e^2 c^4}{R^2c^3}\left(\frac{E}{m_ec^2}\right)^4\\
+     =  &  \frac{2}{3} \frac{k e^2 c}{R^2}\left(\frac{E}{m_ec^2}\right)^4\\
+    =& \frac{A}{R^2} \left(\frac{E}{m_ec^2}\right)^4\,,
+\end{align*}
+donde
+\begin{align}
+    m_e c^2 =& \qty{0.511}{\mega\electronvolt}\frac{\unit{\giga\electronvolt}}{\qty{1e3}{\mega\electronvolt}} = \qty{0.511e-3}{\giga\electronvolt}\,,\\
+    A =&\frac{2 }{3}  {k e^2 c}=\frac{2}{3}  {\num{8.99e9} (\num{1.602e-19})^2\,\num{3e8} }\nonumber\\
+    =&\qty{4.61e-20}{\joule\meter\squared\per\second}\,\frac{\unit{\giga\electronvolt}}{\qty{1.602e-10}{\joule}}=\qty{2.88e-10}{\giga\electronvolt\meter\squared\per\second}\,,\\
+    R =& \frac{\text{circunferencia}}{2\pi} = \frac{\qty{27e3}{\meter}}{2\pi} = \qty{4297.18}{\meter}\,.
+\end{align}
+\begin{align*}
+    \frac{A}{R^2} =&\frac{\qty{2.88e-10}{\giga\electronvolt\meter\squared\per\second}}{(\qty{4297.18}{\meter})^2}
+     =\qty{1.56e-17}{\giga\electronvolt\per\second}\,.
+\end{align*}
+Entonces
+\begin{align*}
+    P =& \frac{A}{R^2}\left(\frac{E}{m_ec^2}\right)^4\\
+    =& \qty{1.56e-17}{\giga\electronvolt\per\second}\left(\frac{\qty{100}{\giga\electronvolt}}{\qty{0.511e-3}{\giga\electronvolt}}\right)^4\\
+    =& \qty{22877}{\giga\electronvolt\per\second}\,.
+\end{align*}
+\end{solution}
+
+\newpage
+\end{comment}
+\item\label{item:solenoide} Diseñe un solenoide de longitud $L = \qty{0.5}{\meter}$ que genere en su interior un campo magnético $B = \qty{0.02}{\tesla}$ usando una corriente $I = \qty{5.0}{\ampere}$. ¿Cuántas vueltas $N$ se necesitan como mínimo?
+
+Ecuaciones: el campo dentro de un solenoide largo es
+\begin{equation}
+    B = \mu_0 \left( \frac{N}{L} \right) I\,,
+\end{equation}
+con $\mu_0 = 4\pi\times 10^{-7}\,\unit{\tesla\meter\per\ampere}$.
+
+\vspace{6cm}
+
+\begin{solution}
+Despejando $N$:
+\begin{align}
+    N = \frac{B L}{\mu_0 I} = \frac{(\qty{0.02}{\tesla})(\qty{0.5}{\meter})}{(4\pi\times 10^{-7}\,\unit{\tesla\meter\per\ampere})(\qty{5.0}{\ampere})} = 1591.5\,.
+\end{align}
+Como no se puede dar media vuelta y con 1591 vueltas el campo queda un poco por debajo de $\qty{0.02}{\tesla}$, el mínimo es $N = 1592$ vueltas, es decir, unas $3183$ vueltas por metro.
+\end{solution}
+
+\newpage
+\begin{comment}  % problema comentado: corriente de desplazamiento
+\item\label{item:desplazamiento} \textbf{El aporte de Maxwell (corriente de desplazamiento):} Un condensador de placas paralelas de área $A = \qty{0.1}{\meter\squared}$ se está cargando rápidamente. Aunque no hay electrones cruzando el vacío entre las placas, el campo eléctrico $E$ está aumentando a un ritmo de $\Delta E/\Delta t = \qty{1.0e6}{\volt\per\meter\per\second}$. Calcule la ``corriente de desplazamiento'' equivalente entre las placas.
+
+Ecuaciones: el cambio del flujo eléctrico es
+\begin{equation}
+    \frac{\Delta \Phi_E}{\Delta t} = A\, \frac{\Delta E}{\Delta t}\,,
+\end{equation}
+y la corriente de desplazamiento de Maxwell es
+\begin{equation}
+    I_d = \varepsilon_0\, \frac{\Delta \Phi_E}{\Delta t}\,,
+\end{equation}
+con $\varepsilon_0 = \qty{8.85e-12}{\farad\per\meter}$.
+
+\vspace{6cm}
+
+\begin{solution}
+\begin{align}
+    I_d = \varepsilon_0 A\, \frac{\Delta E}{\Delta t} = (\qty{8.85e-12}{\farad\per\meter})(\qty{0.1}{\meter\squared})(\qty{1.0e6}{\volt\per\meter\per\second}) = \qty{8.85e-7}{\ampere}\,.
+\end{align}
+Es una corriente de menos de un microamperio: entre las placas no pasa ninguna carga, pero el campo eléctrico que cambia produce un campo magnético, igual que lo haría esa corriente en un alambre. Las unidades cuadran porque $\unit{\farad\volt} = \unit{\coulomb}$ y $\unit{\coulomb\per\second} = \unit{\ampere}$.
+\end{solution}
+
+\newpage
+\end{comment}
+\item\label{item:montana-electrica} \textbf{Montaña rusa eléctrica.} Una esfera pequeña de masa $m=\qty{2.0}{\gram}$ y carga $q=+\qty{2.0}{\micro\coulomb}$ se mueve sin fricción por una vía que está sobre una mesa horizontal, dentro de una región donde hay un campo eléctrico uniforme de magnitud $E=\qty{5.0e3}{\newton\per\coulomb}$. La figura muestra la vía vista desde arriba: el campo apunta hacia abajo en la figura. La esfera parte del reposo en $A$. Como la mesa es horizontal, el peso no influye en el movimiento.
+
+Ecuaciones: la \textbf{línea de altura cero} es la recta punteada que pasa por $B$, y las distancias $y$ se miden desde ella \textbf{en contra del campo} (hacia arriba en la figura). La \textbf{energía potencial eléctrica} de la esfera a una distancia $y$ de esa recta es $U = qEy$, de modo que $U = 0$ sobre la línea de altura cero (es la versión eléctrica de $U = mgh$); la \textbf{energía cinética} es $K = \tfrac{1}{2} m v^2$, y sin fricción la energía mecánica $K + U$ se conserva.
+
+\begin{center}
+\begin{tikzpicture}[x=0.76cm,y=0.76cm]
+    % campo eléctrico uniforme
+    \foreach \x in {-0.6,1.4,...,11.4} {
+        \draw[-{Stealth}, gray!60, thick] (\x,4.9) -- (\x,0.4);
+    }
+    \node[gray!70!black, right] at (7.4,4.5) {$\boldsymbol{E}$};
+    % línea de altura cero, por B
+    \draw[dashed, gray] (-1.2,0.08) -- (11.6,0.08);
+    \node[gray!70!black, font=\small, anchor=west] at (4.0,-0.25) {$y=0$, $U=0$};
+    % vía
+    \draw[very thick] (-1.1,4) -- (0,4) to[out=0,in=180] (3,0.08) to[out=0,in=180] (6,2.4)
+        to[out=0,in=180] (8.5,1) to[out=0,in=180] (11,4.4) -- (11.5,4.4);
+    % distancias medidas en contra del campo
+    \foreach \x/\y/\p/\h in {0/4/A/{20}, 6/2.4/C/{12}, 11/4.4/D/{22}} {
+        \draw[dashed, gray] (\x,0.08) -- (\x,\y);
+        \fill (\x,\y) circle (1.6pt);
+        \node[above] at (\x,\y+0.05) {$\p$};
+        \node[right, font=\small, fill=white, inner sep=1pt] at (\x,\y/2) {$\qty{\h}{\centi\meter}$};
+    }
+    \fill (3,0.08) circle (1.6pt);
+    \node[below] at (3,0.0) {$B$};
+    % esfera en A
+    \shade[ball color=gray!40] (-0.55,4.22) circle (0.2);
+    \node[font=\small] at (-0.55,4.22) {$+$};
+\end{tikzpicture}
+\end{center}
+
+\begin{enumerate}
+    \item Calcule la energía potencial eléctrica y la energía cinética de la esfera en $A$.
+    \item Usando la conservación de la energía, calcule la rapidez de la esfera en $B$ y en $C$.
+    \item ¿Llega la esfera hasta $D$, a $\qty{22}{\centi\meter}$? ¿Hasta qué distancia de la línea de altura cero puede llegar?
+    \item Si se repite el experimento con una esfera del doble de masa y la misma carga, ¿con qué rapidez llega a $B$? Explique por qué, a diferencia de la montaña rusa con gravedad, aquí la masa no se cancela.
+\end{enumerate}
+
+\begin{solution}
+\begin{enumerate}
+    \item En $A$, $y_A = \qty{0.20}{\meter}$ y la esfera está en reposo:
+    \begin{align}
+        U_A =& qEy_A = (\qty{2.0e-6}{\coulomb})(\qty{5.0e3}{\newton\per\coulomb})(\qty{0.20}{\meter}) = \qty{2.0e-3}{\joule}\,, \nonumber\\
+        K_A =& 0\,.
+    \end{align}
+    \item La energía mecánica se conserva, $K + U = U_A$:
+    \begin{align}
+        \frac{1}{2}mv^2 + qEy =& qEy_A\,, \nonumber\\
+        v =& \sqrt{\frac{2qE}{m}\,(y_A - y)}\,,
+    \end{align}
+    con $qE/m = (\qty{2.0e-6}{\coulomb})(\qty{5.0e3}{\newton\per\coulomb})/(\qty{2.0e-3}{\kilo\gram}) = \qty{5.0}{\meter\per\second\squared}$. En $B$ ($y=0$) y en $C$ ($y=\qty{0.12}{\meter}$):
+    \begin{align}
+        v_B =& \sqrt{2(5.0)(0.20)}\,\unit{\meter\per\second} \approx \qty{1.41}{\meter\per\second}\,, &
+        v_C =& \sqrt{2(5.0)(0.20-0.12)}\,\unit{\meter\per\second} \approx \qty{0.89}{\meter\per\second}\,.
+    \end{align}
+    Comprobación en $B$: $K_B = \tfrac{1}{2}(\qty{2.0e-3}{\kilo\gram})(\qty{1.41}{\meter\per\second})^2 \approx \qty{2.0e-3}{\joule} = U_A$.
+    \item No: para llegar a $D$ necesitaría una energía potencial $qE\,(\qty{0.22}{\meter})$, mayor que toda la energía que tiene, $qE\,(\qty{0.20}{\meter})$. Llega hasta $\qty{20}{\centi\meter}$ de la línea de altura cero, se detiene y regresa. La conclusión no depende de $q$, $m$ ni $E$.
+    \item El campo le entrega la misma energía, $qE\,y_A = \qty{2.0e-3}{\joule}$, pero ahora a una masa doble:
+    \begin{align}
+        \frac{1}{2}(2m)v_B'^2 = qE\,y_A \;\Longrightarrow\; v_B' = \frac{v_B}{\sqrt{2}} = \frac{\qty{1.41}{\meter\per\second}}{\sqrt{2}} = \qty{1.00}{\meter\per\second}\,.
+    \end{align}
+    En la montaña rusa la masa se cancela porque el peso, $mg$, es proporcional a la masa. La fuerza eléctrica, $qE$, depende de la carga y no de la masa.
+\end{enumerate}
+\end{solution}
+
+\newpage
+\item\label{item:balmer} \textbf{La línea roja del hidrógeno.} En el modelo de Bohr, las energías permitidas del electrón en el átomo de hidrógeno son
+\begin{equation}
+    E_n = -\frac{\qty{13.6}{\electronvolt}}{n^2}\,, \qquad n = 1, 2, 3, \dots
+\end{equation}
+Cuando el electrón cae de la órbita $n=3$ a la órbita $n=2$, el átomo emite un fotón: la línea roja $H_\alpha$ de la serie de Balmer. La energía del fotón se relaciona con su frecuencia $f$ y su longitud de onda $\lambda$ mediante
+\begin{equation}
+    E_{\text{fotón}} = h f\,, \qquad c = \lambda f\,,
+\end{equation}
+con $h = \qty{4.136e-15}{\electronvolt\second}$ (constante de Planck) y $c = \qty{3.00e8}{\meter\per\second}$.
+
+\begin{enumerate}
+    \item Calcule las energías $E_3$ y $E_2$.
+    \item Calcule la energía del fotón emitido, $E_{\text{fotón}} = E_3 - E_2$. ¿Por qué es positiva?
+    \item Calcule la frecuencia del fotón.
+    \item Calcule su longitud de onda en nanómetros y diga de qué color es la luz.
+
+\textit{Sugerencia para verificar la respuesta:} la luz visible va de unos $\qty{380}{\nano\meter}$ (violeta) a unos $\qty{750}{\nano\meter}$, y el rojo corresponde a longitudes de onda entre unos $\qty{620}{\nano\meter}$ y $\qty{750}{\nano\meter}$.
+\end{enumerate}
+
+\begin{solution}
+\begin{enumerate}
+    \item
+    \begin{align}
+        E_3 =& -\frac{\qty{13.6}{\electronvolt}}{9} \approx \qty{-1.51}{\electronvolt}\,, &
+        E_2 =& -\frac{\qty{13.6}{\electronvolt}}{4} = \qty{-3.40}{\electronvolt}\,.
+    \end{align}
+    \item
+    \begin{align}
+        E_{\text{fotón}} = E_3 - E_2 = \qty{-1.51}{\electronvolt} - (\qty{-3.40}{\electronvolt}) \approx \qty{1.89}{\electronvolt}\,.
+    \end{align}
+    Es positiva porque es la energía que se lleva la luz: el átomo pierde $E_2 - E_3 = \qty{-1.89}{\electronvolt}$ y el fotón la gana. La energía de un fotón, $hf$, siempre es positiva.
+    \item
+    \begin{align}
+        f = \frac{E_{\text{fotón}}}{h} = \frac{\qty{1.889}{\electronvolt}}{\qty{4.136e-15}{\electronvolt\second}} \approx \qty{4.57e14}{\hertz}\,.
+    \end{align}
+    \item
+    \begin{align}
+        \lambda = \frac{c}{f} = \frac{\qty{3.00e8}{\meter\per\second}}{\qty{4.57e14}{\hertz}} \approx \qty{6.57e-7}{\meter} = \qty{657}{\nano\meter}\,.
+    \end{align}
+    Está entre $\qty{620}{\nano\meter}$ y $\qty{750}{\nano\meter}$: es luz roja. El valor medido es $\qty{656.3}{\nano\meter}$; la pequeña diferencia viene de redondear $c$ y $\qty{13.6}{\electronvolt}$.
+\end{enumerate}
+\end{solution}
+
+\newpage
+\item\label{item:coulomb-nulo} \textbf{Punto de fuerza nula.} Dos cargas puntuales, $q_1 = +\qty{4.0}{\micro\coulomb}$ y $q_2 = +\qty{9.0}{\micro\coulomb}$, están fijas y separadas una distancia $d = \qty{10}{\centi\meter}$. La figura muestra las líneas del campo eléctrico que producen. Se busca el punto, sobre la línea que une las cargas, donde una tercera carga $q_3$ no sentiría ninguna fuerza eléctrica. La recta punteada, perpendicular a la línea que une las cargas, marca ese punto a una distancia $x$ de $q_1$.
+
+Ecuaciones: la magnitud de la fuerza eléctrica entre dos cargas puntuales separadas una distancia $r$ es la ley de Coulomb,
+\begin{equation}
+    F = k\,\frac{\lvert q_a q_b\rvert}{r^2}\,,
+\end{equation}
+con $k = \qty{8.99e9}{\newton\meter\squared\per\coulomb\squared}$.
+
+\begin{center}
+\begin{tikzpicture}[x=0.8cm,y=0.8cm,
+    decoration={markings, mark=at position 0.45 with {\arrow{Stealth}}}]
+    % líneas del campo eléctrico de las dos cargas (calculadas numéricamente;
+    % salen 8 líneas de q1 y 18 de q2, en proporción a sus cargas)
+    \draw[gray!70, thin, postaction={decorate}] plot coordinates {(0.32,0.13) (0.43,0.18) (0.54,0.23) (0.66,0.27) (0.77,0.32) (0.88,0.37) (0.99,0.41) (1.10,0.46) (1.21,0.51) (1.31,0.56) (1.42,0.61) (1.53,0.66) (1.64,0.72) (1.75,0.77) (1.85,0.83) (1.96,0.89) (2.06,0.95) (2.16,1.01) (2.26,1.08) (2.36,1.15) (2.46,1.22) (2.55,1.30) (2.64,1.38) (2.72,1.46) (2.80,1.55) (2.87,1.65) (2.94,1.75) (2.99,1.85) (3.05,1.96) (3.09,2.07) (3.13,2.19) (3.16,2.31) (3.17,2.38)};
+    \draw[gray!70, thin, postaction={decorate}] plot coordinates {(0.13,0.32) (0.18,0.43) (0.22,0.55) (0.27,0.66) (0.31,0.77) (0.36,0.88) (0.40,0.99) (0.44,1.11) (0.48,1.22) (0.52,1.33) (0.56,1.45) (0.59,1.56) (0.63,1.68) (0.66,1.79) (0.69,1.91) (0.72,2.02) (0.74,2.14) (0.77,2.26) (0.79,2.38)};
+    \draw[gray!70, thin, postaction={decorate}] plot coordinates {(-0.13,0.32) (-0.18,0.43) (-0.23,0.54) (-0.27,0.65) (-0.32,0.77) (-0.37,0.88) (-0.42,0.98) (-0.47,1.09) (-0.52,1.20) (-0.57,1.31) (-0.62,1.42) (-0.67,1.53) (-0.73,1.63) (-0.78,1.74) (-0.84,1.85) (-0.89,1.95) (-0.95,2.06) (-1.01,2.16) (-1.07,2.27) (-1.13,2.37)};
+    \draw[gray!70, thin, postaction={decorate}] plot coordinates {(-0.32,0.13) (-0.43,0.18) (-0.55,0.23) (-0.66,0.27) (-0.77,0.32) (-0.88,0.36) (-0.99,0.41) (-1.10,0.45) (-1.21,0.50) (-1.32,0.54) (-1.44,0.58) (-1.55,0.63) (-1.66,0.67) (-1.77,0.71) (-1.88,0.76) (-2.00,0.80) (-2.11,0.84) (-2.22,0.88) (-2.33,0.92) (-2.45,0.96) (-2.56,1.01) (-2.60,1.02)};
+    \draw[gray!70, thin, postaction={decorate}] plot coordinates {(-0.32,-0.13) (-0.43,-0.18) (-0.55,-0.23) (-0.66,-0.27) (-0.77,-0.32) (-0.88,-0.36) (-0.99,-0.41) (-1.10,-0.45) (-1.21,-0.50) (-1.32,-0.54) (-1.44,-0.58) (-1.55,-0.63) (-1.66,-0.67) (-1.77,-0.71) (-1.88,-0.76) (-2.00,-0.80) (-2.11,-0.84) (-2.22,-0.88) (-2.33,-0.92) (-2.45,-0.96) (-2.56,-1.01) (-2.60,-1.02)};
+    \draw[gray!70, thin, postaction={decorate}] plot coordinates {(-0.13,-0.32) (-0.18,-0.43) (-0.23,-0.54) (-0.27,-0.65) (-0.32,-0.77) (-0.37,-0.88) (-0.42,-0.98) (-0.47,-1.09) (-0.52,-1.20) (-0.57,-1.31) (-0.62,-1.42) (-0.67,-1.53) (-0.73,-1.63) (-0.78,-1.74) (-0.84,-1.85) (-0.89,-1.95) (-0.95,-2.06) (-1.01,-2.16) (-1.07,-2.27) (-1.13,-2.37)};
+    \draw[gray!70, thin, postaction={decorate}] plot coordinates {(0.13,-0.32) (0.18,-0.43) (0.22,-0.55) (0.27,-0.66) (0.31,-0.77) (0.36,-0.88) (0.40,-0.99) (0.44,-1.11) (0.48,-1.22) (0.52,-1.33) (0.56,-1.45) (0.59,-1.56) (0.63,-1.68) (0.66,-1.79) (0.69,-1.91) (0.72,-2.02) (0.74,-2.14) (0.77,-2.26) (0.79,-2.38)};
+    \draw[gray!70, thin, postaction={decorate}] plot coordinates {(0.32,-0.13) (0.43,-0.18) (0.54,-0.23) (0.66,-0.27) (0.77,-0.32) (0.88,-0.37) (0.99,-0.41) (1.10,-0.46) (1.21,-0.51) (1.31,-0.56) (1.42,-0.61) (1.53,-0.66) (1.64,-0.72) (1.75,-0.77) (1.85,-0.83) (1.96,-0.89) (2.06,-0.95) (2.16,-1.01) (2.26,-1.08) (2.36,-1.15) (2.46,-1.22) (2.55,-1.30) (2.64,-1.38) (2.72,-1.46) (2.80,-1.55) (2.87,-1.65) (2.94,-1.75) (2.99,-1.85) (3.05,-1.96) (3.09,-2.07) (3.13,-2.19) (3.16,-2.31) (3.17,-2.38)};
+    \draw[gray!70, thin, postaction={decorate}] plot coordinates {(10.34,0.06) (10.46,0.08) (10.58,0.10) (10.70,0.12) (10.82,0.14) (10.94,0.16) (11.05,0.19) (11.17,0.21) (11.29,0.23) (11.41,0.25) (11.53,0.27) (11.64,0.29) (11.76,0.31) (11.88,0.33) (12.00,0.35) (12.12,0.37) (12.24,0.39) (12.35,0.41) (12.47,0.43) (12.59,0.45)};
+    \draw[gray!70, thin, postaction={decorate}] plot coordinates {(10.30,0.17) (10.41,0.23) (10.51,0.29) (10.62,0.35) (10.72,0.41) (10.82,0.47) (10.93,0.53) (11.03,0.59) (11.14,0.65) (11.24,0.71) (11.34,0.77) (11.45,0.83) (11.55,0.89) (11.66,0.95) (11.76,1.01) (11.87,1.07) (11.97,1.13) (12.07,1.19) (12.18,1.25) (12.28,1.30) (12.39,1.36) (12.49,1.42) (12.60,1.48)};
+    \draw[gray!70, thin, postaction={decorate}] plot coordinates {(10.22,0.27) (10.30,0.36) (10.38,0.45) (10.46,0.54) (10.53,0.64) (10.61,0.73) (10.69,0.82) (10.77,0.91) (10.84,1.00) (10.92,1.09) (11.00,1.18) (11.08,1.28) (11.16,1.37) (11.23,1.46) (11.31,1.55) (11.39,1.64) (11.47,1.73) (11.55,1.82) (11.63,1.91) (11.71,2.00) (11.79,2.09) (11.86,2.18) (11.94,2.27) (12.02,2.36) (12.05,2.39)};
+    \draw[gray!70, thin, postaction={decorate}] plot coordinates {(10.12,0.33) (10.16,0.44) (10.20,0.55) (10.24,0.67) (10.28,0.78) (10.33,0.89) (10.37,1.00) (10.41,1.12) (10.45,1.23) (10.49,1.34) (10.54,1.45) (10.58,1.57) (10.62,1.68) (10.66,1.79) (10.71,1.90) (10.75,2.01) (10.79,2.13) (10.84,2.24) (10.88,2.35) (10.90,2.39)};
+    \draw[gray!70, thin, postaction={decorate}] plot coordinates {(10.00,0.35) (10.00,0.47) (10.00,0.59) (10.00,0.71) (10.00,0.83) (10.00,0.95) (10.00,1.07) (10.00,1.19) (10.00,1.31) (10.01,1.43) (10.01,1.55) (10.01,1.67) (10.01,1.79) (10.01,1.91) (10.02,2.03) (10.02,2.15) (10.02,2.27) (10.03,2.39)};
+    \draw[gray!70, thin, postaction={decorate}] plot coordinates {(9.88,0.33) (9.84,0.44) (9.80,0.55) (9.76,0.67) (9.72,0.78) (9.68,0.89) (9.64,1.01) (9.60,1.12) (9.56,1.23) (9.52,1.35) (9.48,1.46) (9.44,1.57) (9.40,1.69) (9.36,1.80) (9.32,1.91) (9.29,2.03) (9.25,2.14) (9.21,2.26) (9.18,2.37)};
+    \draw[gray!70, thin, postaction={decorate}] plot coordinates {(9.78,0.27) (9.70,0.36) (9.62,0.45) (9.54,0.54) (9.47,0.64) (9.39,0.73) (9.31,0.82) (9.24,0.91) (9.16,1.01) (9.09,1.10) (9.01,1.19) (8.93,1.29) (8.86,1.38) (8.78,1.47) (8.71,1.57) (8.63,1.66) (8.56,1.76) (8.49,1.85) (8.41,1.95) (8.34,2.04) (8.27,2.14) (8.20,2.23) (8.13,2.33) (8.08,2.40)};
+    \draw[gray!70, thin, postaction={decorate}] plot coordinates {(9.70,0.18) (9.59,0.24) (9.49,0.30) (9.39,0.36) (9.28,0.42) (9.18,0.48) (9.07,0.54) (8.97,0.60) (8.87,0.66) (8.76,0.72) (8.66,0.78) (8.56,0.84) (8.45,0.90) (8.35,0.96) (8.25,1.03) (8.15,1.09) (8.04,1.15) (7.94,1.22) (7.84,1.28) (7.74,1.34) (7.64,1.41) (7.54,1.47) (7.44,1.54) (7.34,1.61) (7.24,1.68) (7.14,1.74) (7.04,1.81) (6.95,1.89) (6.85,1.96) (6.76,2.03) (6.66,2.11) (6.57,2.18) (6.48,2.26) (6.39,2.34) (6.33,2.39)};
+    \draw[gray!70, thin, postaction={decorate}] plot coordinates {(9.66,0.06) (9.54,0.08) (9.42,0.10) (9.30,0.12) (9.18,0.14) (9.06,0.17) (8.95,0.19) (8.83,0.21) (8.71,0.23) (8.59,0.25) (8.47,0.27) (8.36,0.29) (8.24,0.31) (8.12,0.34) (8.00,0.36) (7.88,0.38) (7.77,0.40) (7.65,0.42) (7.53,0.45) (7.41,0.47) (7.29,0.49) (7.18,0.52) (7.06,0.54) (6.94,0.56) (6.82,0.59) (6.71,0.62) (6.59,0.64) (6.47,0.67) (6.36,0.70) (6.24,0.73) (6.12,0.76) (6.01,0.79) (5.89,0.82) (5.78,0.86) (5.66,0.89) (5.55,0.93) (5.44,0.97) (5.33,1.02) (5.22,1.07) (5.11,1.12) (5.01,1.18) (4.91,1.25) (4.81,1.32) (4.72,1.40) (4.63,1.48) (4.55,1.57) (4.48,1.67) (4.42,1.77) (4.36,1.87) (4.31,1.98) (4.26,2.09) (4.21,2.20) (4.17,2.32) (4.15,2.39)};
+    \draw[gray!70, thin, postaction={decorate}] plot coordinates {(9.66,-0.06) (9.54,-0.08) (9.42,-0.10) (9.30,-0.12) (9.18,-0.14) (9.06,-0.17) (8.95,-0.19) (8.83,-0.21) (8.71,-0.23) (8.59,-0.25) (8.47,-0.27) (8.36,-0.29) (8.24,-0.31) (8.12,-0.34) (8.00,-0.36) (7.88,-0.38) (7.77,-0.40) (7.65,-0.42) (7.53,-0.45) (7.41,-0.47) (7.29,-0.49) (7.18,-0.52) (7.06,-0.54) (6.94,-0.56) (6.82,-0.59) (6.71,-0.62) (6.59,-0.64) (6.47,-0.67) (6.36,-0.70) (6.24,-0.73) (6.12,-0.76) (6.01,-0.79) (5.89,-0.82) (5.78,-0.86) (5.66,-0.89) (5.55,-0.93) (5.44,-0.97) (5.33,-1.02) (5.22,-1.07) (5.11,-1.12) (5.01,-1.18) (4.91,-1.25) (4.81,-1.32) (4.72,-1.40) (4.63,-1.48) (4.55,-1.57) (4.48,-1.67) (4.42,-1.77) (4.36,-1.87) (4.31,-1.98) (4.26,-2.09) (4.21,-2.20) (4.17,-2.32) (4.15,-2.39)};
+    \draw[gray!70, thin, postaction={decorate}] plot coordinates {(9.70,-0.18) (9.59,-0.24) (9.49,-0.30) (9.39,-0.36) (9.28,-0.42) (9.18,-0.48) (9.07,-0.54) (8.97,-0.60) (8.87,-0.66) (8.76,-0.72) (8.66,-0.78) (8.56,-0.84) (8.45,-0.90) (8.35,-0.96) (8.25,-1.03) (8.15,-1.09) (8.04,-1.15) (7.94,-1.22) (7.84,-1.28) (7.74,-1.34) (7.64,-1.41) (7.54,-1.47) (7.44,-1.54) (7.34,-1.61) (7.24,-1.68) (7.14,-1.74) (7.04,-1.81) (6.95,-1.89) (6.85,-1.96) (6.76,-2.03) (6.66,-2.11) (6.57,-2.18) (6.48,-2.26) (6.39,-2.34) (6.33,-2.39)};
+    \draw[gray!70, thin, postaction={decorate}] plot coordinates {(9.78,-0.27) (9.70,-0.36) (9.62,-0.45) (9.54,-0.54) (9.47,-0.64) (9.39,-0.73) (9.31,-0.82) (9.24,-0.91) (9.16,-1.01) (9.09,-1.10) (9.01,-1.19) (8.93,-1.29) (8.86,-1.38) (8.78,-1.47) (8.71,-1.57) (8.63,-1.66) (8.56,-1.76) (8.49,-1.85) (8.41,-1.95) (8.34,-2.04) (8.27,-2.14) (8.20,-2.23) (8.13,-2.33) (8.08,-2.40)};
+    \draw[gray!70, thin, postaction={decorate}] plot coordinates {(9.88,-0.33) (9.84,-0.44) (9.80,-0.55) (9.76,-0.67) (9.72,-0.78) (9.68,-0.89) (9.64,-1.01) (9.60,-1.12) (9.56,-1.23) (9.52,-1.35) (9.48,-1.46) (9.44,-1.57) (9.40,-1.69) (9.36,-1.80) (9.32,-1.91) (9.29,-2.03) (9.25,-2.14) (9.21,-2.26) (9.18,-2.37)};
+    \draw[gray!70, thin, postaction={decorate}] plot coordinates {(10.00,-0.35) (10.00,-0.47) (10.00,-0.59) (10.00,-0.71) (10.00,-0.83) (10.00,-0.95) (10.00,-1.07) (10.00,-1.19) (10.00,-1.31) (10.01,-1.43) (10.01,-1.55) (10.01,-1.67) (10.01,-1.79) (10.01,-1.91) (10.02,-2.03) (10.02,-2.15) (10.02,-2.27) (10.03,-2.39)};
+    \draw[gray!70, thin, postaction={decorate}] plot coordinates {(10.12,-0.33) (10.16,-0.44) (10.20,-0.55) (10.24,-0.67) (10.28,-0.78) (10.33,-0.89) (10.37,-1.00) (10.41,-1.12) (10.45,-1.23) (10.49,-1.34) (10.54,-1.45) (10.58,-1.57) (10.62,-1.68) (10.66,-1.79) (10.71,-1.90) (10.75,-2.01) (10.79,-2.13) (10.84,-2.24) (10.88,-2.35) (10.90,-2.39)};
+    \draw[gray!70, thin, postaction={decorate}] plot coordinates {(10.22,-0.27) (10.30,-0.36) (10.38,-0.45) (10.46,-0.54) (10.53,-0.64) (10.61,-0.73) (10.69,-0.82) (10.77,-0.91) (10.84,-1.00) (10.92,-1.09) (11.00,-1.18) (11.08,-1.28) (11.16,-1.37) (11.23,-1.46) (11.31,-1.55) (11.39,-1.64) (11.47,-1.73) (11.55,-1.82) (11.63,-1.91) (11.71,-2.00) (11.79,-2.09) (11.86,-2.18) (11.94,-2.27) (12.02,-2.36) (12.05,-2.39)};
+    \draw[gray!70, thin, postaction={decorate}] plot coordinates {(10.30,-0.17) (10.41,-0.23) (10.51,-0.29) (10.62,-0.35) (10.72,-0.41) (10.82,-0.47) (10.93,-0.53) (11.03,-0.59) (11.14,-0.65) (11.24,-0.71) (11.34,-0.77) (11.45,-0.83) (11.55,-0.89) (11.66,-0.95) (11.76,-1.01) (11.87,-1.07) (11.97,-1.13) (12.07,-1.19) (12.18,-1.25) (12.28,-1.30) (12.39,-1.36) (12.49,-1.42) (12.60,-1.48)};
+    \draw[gray!70, thin, postaction={decorate}] plot coordinates {(10.34,-0.06) (10.46,-0.08) (10.58,-0.10) (10.70,-0.12) (10.82,-0.14) (10.94,-0.16) (11.05,-0.19) (11.17,-0.21) (11.29,-0.23) (11.41,-0.25) (11.53,-0.27) (11.64,-0.29) (11.76,-0.31) (11.88,-0.33) (12.00,-0.35) (12.12,-0.37) (12.24,-0.39) (12.35,-0.41) (12.47,-0.43) (12.59,-0.45)};
+    % cargas
+    \shade[ball color=red!40] (0,0) circle (0.3);
+    \node at (0,0) {$+$};
+    \node[fill=white, inner sep=1pt] at (0,2.75) {$q_1 = +\qty{4.0}{\micro\coulomb}$};
+    \shade[ball color=red!40] (10,0) circle (0.3);
+    \node at (10,0) {$+$};
+    \node[fill=white, inner sep=1pt] at (10,2.75) {$q_2 = +\qty{9.0}{\micro\coulomb}$};
+    % recta perpendicular a distancia x
+    \draw[dashed, thick] (4,-2.3) -- (4,2.3);
+    \fill (4,0) circle (2.2pt);
+    \node[fill=white, inner sep=1pt, above right] at (4.05,0.05) {$q_3$};
+    % cotas
+    \draw[gray] (0,-0.35) -- (0,-3.75) (10,-0.35) -- (10,-3.75) (4,-2.3) -- (4,-3.0);
+    \draw[{Stealth}-{Stealth}] (0,-2.85) -- (4,-2.85) node[midway, fill=white, inner sep=1pt] {$x$};
+    \draw[{Stealth}-{Stealth}] (0,-3.6) -- (10,-3.6) node[midway, fill=white, inner sep=1pt] {$d = \qty{10}{\centi\meter}$};
+\end{tikzpicture}
+\end{center}
+
+\begin{enumerate}
+    \item Escriba la magnitud de la fuerza que $q_1$ y $q_2$ ejercen sobre $q_3$ cuando está a una distancia $x$ de $q_1$, entre las dos cargas. ¿En qué sentido apunta cada fuerza si $q_3$ es positiva?
+    \item Igualando las dos fuerzas, encuentre $x$.
+    \item ¿Cambia la respuesta si $q_3$ es negativa o tiene otro valor? Explique.
+\end{enumerate}
+
+\begin{solution}
+\begin{enumerate}
+    \item Con $q_3$ a una distancia $x$ de $q_1$ y $d - x$ de $q_2$:
+    \begin{align}
+        F_1 =& k\,\frac{q_1 q_3}{x^2}\,, & F_2 =& k\,\frac{q_2 q_3}{(d-x)^2}\,.
+    \end{align}
+    Si $q_3$ es positiva, las dos fuerzas son repulsivas: $F_1$ la empuja hacia $q_2$ (a la derecha) y $F_2$ hacia $q_1$ (a la izquierda). Por eso, entre las cargas, pueden anularse.
+    \item
+    \begin{align}
+        k\,\frac{q_1 \cancel{q_3}}{x^2} =& k\,\frac{q_2 \cancel{q_3}}{(d-x)^2}
+        \;\Longrightarrow\; \frac{4}{x^2} = \frac{9}{(10-x)^2}\,, \nonumber\\
+        \frac{2}{x} =& \frac{3}{10-x} \;\Longrightarrow\; 2(10 - x) = 3x \;\Longrightarrow\; x = \qty{4.0}{\centi\meter}\,.
+    \end{align}
+    El punto queda más cerca de la carga menor.
+    \item No: $q_3$ se cancela en la igualdad. Si $q_3$ es negativa, las dos fuerzas cambian de sentido a la vez y siguen anulándose en el mismo punto. En ese punto el campo eléctrico total es cero, sin importar qué carga se ponga allí.
+\end{enumerate}
+\end{solution}
+
+% ===== Banco de problemas no seleccionados: comentados =====
+\begin{comment}
+\item\label{item:lep-vuelta} Calcular la energía perdida por radiación en una vuelta, teniendo en cuenta que el electrón se mueve a la velocidad de la luz. Expresar la respuesta en $\unit{\giga\electronvolt}$.
+
+\begin{solution}
+\begin{align*}
+    \frac{E_{\text{perdida}}}{T} =& P \\
+    \frac{E_{\text{perdida}}}{\dfrac{2\pi R}{c}} = & P\\
+    E_{\text{perdida}}  = &\frac{2\pi R}{c} P\,.
+\end{align*}
+Usando la ecuación para $P$
+\begin{align*}
+    E_{\text{perdida}}  = &\frac{\qty{27e3}{\meter}}{\qty{3e8}{\meter\per\second}}  \qty{22877}{\giga\electronvolt\per\second}\\
+    =&\qty{2.06}{\giga\electronvolt}\,.
+\end{align*}
+\end{solution}
+
+\item\label{item:lep-max} Asumiendo que la energía suministrada a un electrón por vuelta es de $\qty{3.6}{\giga\electronvolt}$ en LEP, calcular la energía máxima a la que se puede acelerar el electrón en dicho acelerador, tal que la energía suministrada para acelerar el electrón durante una vuelta sea igual a la energía perdida por radiación en esa vuelta.
+
+\begin{solution}
+En este caso
+\begin{align*}
+    E_{\text{perdida}}  = &\frac{2\pi R}{c} P\\
+   E_{\text{perdida}} =&\frac{2\pi R}{c} \frac{2}{3} \frac{k e^2 c}{R^2}\left(\frac{E}{m_ec^2}\right)^4\\
+   E_{\text{perdida}} =&\frac{2\pi R}{c} \frac{A}{R^2}\left(\frac{E}{m_ec^2}\right)^4\\
+   E_{\text{perdida}} =&\frac{2\pi}{c} \frac{A}{R}\left(\frac{E}{m_ec^2}\right)^4\\
+   E_{\text{perdida}} =&C_\gamma \frac{E^4}{R}\,,
+\end{align*}
+correspondiente a la ecuación (4.8) de \url{https://inspirehep.net/literature/60854},
+donde
+\begin{align}
+    C_\gamma =& \frac{2\pi}{c}\frac{A}{\left(m_e c^2\right)^4}\nonumber\\
+    =& \frac{2\pi}{\qty{3e8}{\meter\per\second}}\frac{\qty{2.88e-10}{\giga\electronvolt\meter\squared\per\second}}{(\qty{0.511e-3}{\giga\electronvolt})^4}\\
+    =&\qty{8.85e-5}{\meter\per\giga\electronvolt\cubed}\,.
+\end{align}
+La energía máxima, $E_{\text{max}}$, a la que se puede acelerar el electrón es tal que la energía radiada por vuelta, $E_{\text{perdida}}$, sea igual a la energía suministrada por vuelta, $E_{\text{suministrada}}=\qty{3.6}{\giga\electronvolt}$ (ver \url{https://inspirehep.net/literature/560299}):
+\begin{align*}
+    E_{\text{suministrada}} =&C_\gamma \frac{E_{\text{max}}^4}{R}\,,
+\end{align*}
+de donde
+\begin{align*}
+    E_{\text{max}} =&\left( \frac{R E_{\text{suministrada}} }{C_\gamma}\right)^{1/4}\\
+    =&\left(\frac{4297\cdot 3.6}{\num{8.85e-5}}\right)^{1/4}\\
+    =&\qty{116}{\giga\electronvolt}\,.
+\end{align*}
+
+La energía máxima a la que llegó LEP fue de $\qty{104.5}{\giga\electronvolt}$, $\qty{209}{\giga\electronvolt}$ de energía de centro de masa. Para producir el Higgs se hubiese necesitado una energía de centro de masa de al menos $\qty{220}{\giga\electronvolt}$, que requiere un acelerador de un radio más grande (o acelerar partículas más pesadas, como se verá en el punto siguiente).
+
+\textbf{NOTA:} En \url{https://inspirehep.net/literature/560299} se establece que para LEP, ``the total RF voltage per turn needed is $V =\qty{3630}{\mega\volt}$'', que le entrega a un electrón por vuelta una energía de
+\begin{align*}
+    E_{\text{vuelta}} = e V = e\cdot \qty{3630}{\mega\volt} = \qty{3.63}{\giga\electronvolt}\,.
+\end{align*}
+
+Sea en adelante $R_0$ el radio de LEP y $E^0_{\text{suministrada}}$ la energía suministrada por vuelta en LEP. Para un acelerador de radio $R$, la energía suministrada pasa a ser
+\begin{align*}
+    E_{\text{suministrada}} = E^0_{\text{suministrada}}\frac{R}{R_0}\,.
+\end{align*}
+Esto es lógico, ya que un túnel más largo permite instalar más cavidades de radiofrecuencia (RF) para acelerar las partículas.
+Para el nuevo acelerador de circunferencia de $\qty{100}{\kilo\meter}$
+\begin{align*}
+    E_{\text{max}} =&\left( \frac{R E_{\text{suministrada}} }{C_\gamma}\right)^{1/4}
+     = \left(\frac{R^2 E^0_{\text{suministrada}}}{R_0 C_\gamma}\right)^{1/4}
+     = \left(\frac{R^2 }{R_0^2}\right)^{1/4}\left(\frac{R_0 E^0_{\text{suministrada}}}{ C_\gamma}\right)^{1/4}\\
+    =& E^0_{\text{max}}\sqrt{\frac{R}{R_0}}
+    = \qty{116}{\giga\electronvolt}\sqrt{\frac{\qty{100}{\kilo\meter}}{\qty{27}{\kilo\meter}}}
+    = \qty{223}{\giga\electronvolt}\,,
+\end{align*}
+por rayo, para una energía de centro de masa máxima de unos $\qty{440}{\giga\electronvolt}$.\footnote{En \url{https://inspirehep.net/literature/2149705} la dependencia de $E_{\text{max}}$ es con $R^{1/3}$ en lugar de $R^{1/2}$.}
+
+En el mismo sitio del CERN, donde funciona el LHC y se encontraba LEP, se planea construir un nuevo acelerador de $\qty{90.7}{\kilo\meter}$ llamado Future Circular Collider (FCC-ee), \url{https://home.cern/science/accelerators/future-circular-collider}, que tendrá una energía máxima de centro de masa de $\qty{370}{\giga\electronvolt}$, suficiente no solo para producir el Higgs, sino también pares top-antitop, cada uno con una masa de $\qty{173}{\giga\electronvolt}/c^2$.
+\end{solution}
+
+\item\label{item:lep-proton} Teniendo en cuenta que un protón tiene la misma carga, $e$, explique por qué el protón se puede acelerar a energías más altas en un acelerador de partículas de la misma circunferencia de $\qty{27}{\kilo\meter}$.
+
+\begin{solution}
+De
+\begin{align*}
+    E_{\text{perdida}} =&\frac{2\pi R}{c} \frac{2}{3} \frac{k e^2 c}{R^2}\left(\frac{E}{m c^2}\right)^4\propto \frac{1}{m^4}\,,
+\end{align*}
+vemos que la energía perdida va con el inverso de la cuarta potencia de la masa. De modo que a mayor masa (como el protón o incluso el muón), menor es la energía perdida por radiación.
+
+La energía perdida por radiación para protones, $E^p_{\text{perdida}}$, es por consiguiente un factor
+\begin{align*}
+    \left(\frac{m_e}{m_p}\right)^4 =  \left(\frac{m_e c^2}{m_p c^2}\right)^4
+    = \left(\frac{\qty{0.511e-3}{\giga\electronvolt}}{\qty{0.938}{\giga\electronvolt}}\right)^4
+    = \num{8.8e-14}
+\end{align*}
+menor.
+\end{solution}
+\end{comment}
+
+\end{enumerate}
+
+\end{document}
