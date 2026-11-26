@@ -60,8 +60,8 @@ dist/                             skills empaquetadas (.skill) para subir a clau
 ### Ejemplo: recibir los exámenes con un formulario de Google
 
 Para el Parcial 2 (2025-2) los estudiantes subieron las fotos de las páginas de
-su examen resuelto con el formulario de Google «Examen»:
-<https://docs.google.com/forms/d/1_Pj4jhaTbBAxDYHqlayk-rj3TUM7bgvgpFqn24DqJF4/viewform>.
+su examen resuelto con el formulario de Google del curso:
+<https://bit.ly/fundamentacionenfisica20>.
 Las fotos de cada respuesta se calificaron con el calificador, en modo profesor,
 y luego se reunieron en una página de calificaciones. El mismo formulario sirve
 para los exámenes siguientes. Las respuestas del formulario (fotos y correos) se
