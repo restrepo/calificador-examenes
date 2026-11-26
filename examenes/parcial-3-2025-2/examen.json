@@ -90,12 +90,12 @@
     {
       "n": 4,
       "titulo": "Punto de fuerza nula",
-      "enunciado": "Dos cargas puntuales, q1 = +4,0 μC y q2 = +9,0 μC, están fijas y separadas d = 10 cm. La figura muestra las líneas del campo eléctrico que producen. Se busca el punto, sobre la línea que une las cargas, donde una tercera carga q3 no sentiría ninguna fuerza eléctrica; una recta punteada perpendicular a la línea que une las cargas marca ese punto a una distancia x de q1, entre las dos cargas. Ecuación dada: ley de Coulomb, F = k |q_a q_b|/r², con k = 8,99 × 10^9 N·m²/C². a) Escriba la magnitud de la fuerza que q1 y q2 ejercen sobre q3 cuando está a una distancia x de q1, entre las dos cargas. ¿En qué sentido apunta cada fuerza si q3 es positiva? b) Igualando las dos fuerzas, encuentre x. c) ¿Cambia la respuesta si q3 es negativa o tiene otro valor? Explique.",
+      "enunciado": "Dos cargas puntuales, q1 = +4,0 μC y q2 = +9,0 μC, están fijas y separadas d = 10 cm. La figura muestra las líneas del campo eléctrico que producen. Se busca el punto, sobre la línea que une las cargas, donde una tercera carga q3 no sentiría ninguna fuerza eléctrica; una recta punteada perpendicular a la línea que une las cargas marca ese punto a una distancia x de q1, entre las dos cargas. Ecuación dada: ley de Coulomb, F = k |q_a q_b|/r², con k = 8,99 × 10^9 N·m²/C². a) Escriba la expresión analítica de la magnitud de la fuerza que q1 y q2 ejercen sobre q3 cuando está a una distancia x de q1, entre las dos cargas, en términos de k, q1, q2, q3, x y d, sin reemplazar ningún valor numérico. ¿En qué sentido apunta cada fuerza si q3 es positiva? b) Igualando las dos fuerzas, encuentre x. c) ¿Cambia la respuesta si q3 es negativa o tiene otro valor? Explique.",
       "solucion": "a) F1 = k q1 q3/x² y F2 = k q2 q3/(d − x)². Si q3 es positiva, las dos son repulsivas: F1 la empuja hacia q2 y F2 hacia q1, por eso entre las cargas pueden anularse. b) k q1 q3/x² = k q2 q3/(d − x)² ⇒ 4/x² = 9/(10 − x)² ⇒ 2/x = 3/(10 − x) ⇒ 2(10 − x) = 3x ⇒ x = 4,0 cm (más cerca de la carga menor). c) No: q3 se cancela en la igualdad. Si q3 es negativa, las dos fuerzas cambian de sentido a la vez y siguen anulándose en el mismo punto: allí el campo eléctrico total es cero.",
       "partes": [
         {
           "id": "4-a",
-          "txt": "a) F1 = k q1 q3/x², F2 = k q2 q3/(d − x)² y los sentidos: F1 hacia q2 y F2 hacia q1 (repulsivas)",
+          "txt": "a) Expresiones analíticas, sin valores numéricos: F1 = k q1 q3/x², F2 = k q2 q3/(d − x)², y los sentidos: F1 hacia q2 y F2 hacia q1 (repulsivas)",
           "max": 8
         },
         {
