@@ -1,0 +1,31 @@
+% --- xsim: problemas, soluciones y banco (bloque estándar del curso) ---
+% Cada problema es un entorno exercise con su solution justo debajo:
+%   \begin{exercise}[ID=..., subtitle={...}, tags={...}, points=..., nuevapagina=true]
+% Solo se imprimen los problemas cuya etiqueta está en \xsimsetup{tags=...};
+% los demás forman el banco. Las partes de un problema que no se preguntan
+% van en \begin{comment}...\end{comment} dentro del problema.
+\usepackage{enumitem}
+\usepackage{xsim}
+% xsim relee cada problema desde un archivo: con babel en español, < y > activos
+% rompen opciones de TikZ como >=stealth. Se desactivan esos dos atajos.
+\AtBeginDocument{\shorthandoff{<>}}
+% comment: partes que no se preguntan; se descartan (no usa el paquete comment,
+% que no funciona dentro de los problemas de xsim)
+\usepackage{environ}
+\NewEnviron{comment}{}
+\DeclareExerciseProperty{nuevapagina}
+\newif\ifmostrarpuntos \mostrarpuntostrue   % \mostrarpuntosfalse: no imprime «(25 puntos)»
+% Cada problema se imprime como un ítem numerado de una lista, igual que con
+% \begin{enumerate}\item: las listas internas conservan sus etiquetas a), b)...
+\DeclareExerciseEnvironmentTemplate{parcial}
+  {\IfExercisePropertySetT{nuevapagina}{\clearpage}%
+   \begin{enumerate}[start=\GetExerciseProperty{counter}]
+   \item \IfExercisePropertySetT{subtitle}{\textbf{\GetExerciseProperty{subtitle}.} }%
+   \ifmostrarpuntos\IfExercisePropertySetT{points}{\textit{(\GetExerciseProperty{points}~puntos)} }\fi
+   \ignorespaces}
+  {\end{enumerate}}
+\DeclareExerciseEnvironmentTemplate{parcial-sol}
+  {\begin{enumerate}\item[]\textbf{Solución: }\ignorespaces}
+  {\end{enumerate}\medskip}
+\xsimsetup{exercise/template = parcial, solution/template = parcial-sol}
+% --- fin xsim ---

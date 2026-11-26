@@ -36,12 +36,29 @@ COMENZAR.md                       cómo arrancar desde un chat nuevo
   imagen-a-latex-manuscrito/      foto de examen resuelto → LaTeX (manuscrito marcado)
   completar-documento-latex/      fragmento LaTeX → documento y PDF
   correo-estudiantes-curso/       correo a los estudiantes en CCO
-plantilla/examen.tex              plantilla de examen: banco de problemas y soluciones conmutables
+  banco-examenes/                 banco de problemas (xsim): listar, PDF del banco, armar exámenes
+plantilla/examen.tex              plantilla de examen en xsim: banco de problemas y soluciones conmutables
 examenes/<examen>/                un examen: examen.tex, examen.json y su ficha README.md
-  parcial-2-2025-2/               ejemplo: Parcial 2, dinámica newtoniana
+  parcial-2-2025-2/               Parcial 2, dinámica newtoniana
+  parcial-3-2025-2/               Parcial 3, electromagnetismo
 scripts/nuevo_examen.py           crea la carpeta de un examen nuevo
 scripts/empaquetar_skills.py      empaqueta las skills en dist/
 dist/                             skills empaquetadas (.skill) para subir a claude.ai
+```
+
+## Banco de problemas
+
+Los exámenes están en formato [xsim](https://ctan.org/pkg/xsim): cada problema
+es un entorno `exercise` con su solución, su `ID`, sus puntos y una etiqueta
+(`tags`). El examen imprime solo los problemas con su etiqueta; los demás
+(`tags={banco}`) quedan guardados. Con la skill `banco-examenes`:
+
+```bash
+B=.claude/skills/banco-examenes/scripts/banco.py
+python3 -B $B listar                                   # todos los problemas
+python3 -B $B banco -o /tmp/banco/banco.tex            # PDF del banco con soluciones
+python3 -B $B armar --ids "caida,impulso|coulomb-nulo" --titulo "Quiz" -o /tmp/quiz/quiz.tex
+python3 -B $B armar --ids "caida,impulso|coulomb-nulo" --soluciones -o /tmp/quiz/quiz-sol.tex
 ```
 
 ## Flujo de un examen

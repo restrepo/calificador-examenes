@@ -14,6 +14,7 @@ repositorio:
 | `imagen-a-latex-manuscrito` | Foto de un examen resuelto → LaTeX, con el texto manuscrito marcado. |
 | `completar-documento-latex` | Fragmento LaTeX → documento compilable y PDF, con lo manuscrito en azul. |
 | `correo-estudiantes-curso` | Correo a los estudiantes en CCO (fecha de examen, notas, supletorios). |
+| `banco-examenes` | Banco de problemas de todos los exámenes (xsim): listar, PDF del banco con o sin soluciones, armar un examen, taller o quiz con problemas elegidos, convertir exámenes viejos a xsim. |
 
 ## Al empezar una sesión
 
@@ -32,9 +33,10 @@ repositorio:
    `examen.tex` (la plantilla), un esqueleto de `examen.json` y la ficha `README.md`.
 2. **El examen.** Pon en `examen.tex` el LaTeX real del examen (pegado, adjunto,
    de Overleaf o de otro repositorio). Si se escribe desde cero, usa la
-   plantilla: cada problema es un `\item\label{item:…}` con su `solution`
-   debajo, y el banco de problemas va en `\begin{comment}`. Para imprimir, las
-   soluciones quedan excluidas (`\excludecomment{solution}`).
+   plantilla, en formato xsim: cada problema es un `exercise` con `ID`, `tags`
+   y `points`, y su `solution` debajo. Se imprimen los problemas con la etiqueta
+   de `\xsimsetup{tags={…}}`; los demás (`tags={banco}`) son el banco. Para el
+   solucionario, `\solucionestrue`. Ver la skill `banco-examenes`.
 3. **El JSON y el calificador.** Sigue la skill `calificador-parcial`
    (secciones 1 a 4) con `KIT=.claude/skills/calificador-parcial`:
    ```bash

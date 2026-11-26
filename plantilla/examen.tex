@@ -1,14 +1,19 @@
 % =====================================================================
-% Plantilla de examen con banco de problemas y soluciones conmutables.
+% Plantilla de examen en formato xsim: banco de problemas y soluciones.
 %
-% - Cada problema es un \item con \label{item:<nombre>} y su solución en el
-%   entorno solution, justo debajo.
-% - Los problemas que no van en el examen se dejan en el banco, dentro de
-%   \begin{comment} ... \end{comment}.
-% - Para imprimir el examen: deja \excludecomment{solution} (así viene).
-%   Para ver las soluciones: comenta esa línea.
-% - Para mostrar también lo que va dentro de \phantom (tablas que el
-%   estudiante completa), descomente la redefinición de \phantom.
+% - Cada problema es un entorno exercise con su solution justo debajo:
+%     \begin{exercise}[ID=nombre, subtitle={Título}, tags={examen}, points=25]
+%   ID es único; subtitle, points y nuevapagina=true son opcionales.
+% - Se imprimen solo los problemas cuya etiqueta (tags) coincide con la de
+%   \xsimsetup{tags={...}} en el bloque «Selección del examen». Los que
+%   tienen otra etiqueta (por ejemplo, banco) quedan guardados sin imprimirse.
+% - Para el solucionario: \solucionestrue. También muestra lo que va dentro
+%   de \phantom (tablas que el estudiante completa).
+% - nuevapagina=true empieza el problema en una página nueva.
+% - Partes de un problema que no se preguntan: \begin{comment}...\end{comment}
+%   dentro del problema.
+% - La skill banco-examenes lista todos los problemas de los exámenes,
+%   arma el banco con soluciones y monta exámenes nuevos con problemas elegidos.
 % =====================================================================
 \documentclass[12pt, a4paper]{article}
 
@@ -26,29 +31,59 @@
 \usetikzlibrary{babel, patterns}
 
 % soluciones y banco de problemas
-\usepackage{comment}
-\specialcomment{solution}
-  {\begingroup \textbf{Solución: }}{\medskip \endgroup}
-\excludecomment{solution}   % comente esta línea para ver las soluciones
-\excludecomment{comment}    % banco de problemas que no van en el examen
-% \renewcommand{\phantom}[1]{#1}  % descomente junto con la línea de solution
                                   % para mostrar lo que va dentro de \phantom
 
 \pagestyle{empty}
 \sectionfont{\centering\large\bfseries}
+
+% --- xsim: problemas, soluciones y banco (bloque estándar del curso) ---
+% Cada problema es un entorno exercise con su solution justo debajo:
+%   \begin{exercise}[ID=..., subtitle={...}, tags={...}, points=..., nuevapagina=true]
+% Solo se imprimen los problemas cuya etiqueta está en \xsimsetup{tags=...};
+% los demás forman el banco. Las partes de un problema que no se preguntan
+% van en \begin{comment}...\end{comment} dentro del problema.
+\usepackage{enumitem}
+\usepackage{xsim}
+% xsim relee cada problema desde un archivo: con babel en español, < y > activos
+% rompen opciones de TikZ como >=stealth. Se desactivan esos dos atajos.
+\AtBeginDocument{\shorthandoff{<>}}
+% comment: partes que no se preguntan; se descartan (no usa el paquete comment,
+% que no funciona dentro de los problemas de xsim)
+\usepackage{environ}
+\NewEnviron{comment}{}
+\DeclareExerciseProperty{nuevapagina}
+\newif\ifmostrarpuntos \mostrarpuntostrue   % \mostrarpuntosfalse: no imprime «(25 puntos)»
+% Cada problema se imprime como un ítem numerado de una lista, igual que con
+% \begin{enumerate}\item: las listas internas conservan sus etiquetas a), b)...
+\DeclareExerciseEnvironmentTemplate{parcial}
+  {\IfExercisePropertySetT{nuevapagina}{\clearpage}%
+   \begin{enumerate}[start=\GetExerciseProperty{counter}]
+   \item \IfExercisePropertySetT{subtitle}{\textbf{\GetExerciseProperty{subtitle}.} }%
+   \ifmostrarpuntos\IfExercisePropertySetT{points}{\textit{(\GetExerciseProperty{points}~puntos)} }\fi
+   \ignorespaces}
+  {\end{enumerate}}
+\DeclareExerciseEnvironmentTemplate{parcial-sol}
+  {\begin{enumerate}\item[]\textbf{Solución: }\ignorespaces}
+  {\end{enumerate}\medskip}
+\xsimsetup{exercise/template = parcial, solution/template = parcial-sol}
+% --- fin xsim ---
+% === Selección del examen (cambie solo estas líneas) ===
+\xsimsetup{tags={examen}}   % se imprimen solo los problemas con esta etiqueta
+\newif\ifsoluciones
+\solucionesfalse   % \solucionestrue: solucionario (también muestra lo que va en \phantom)
+\ifsoluciones\xsimsetup{solution/print=true}\renewcommand{\phantom}[1]{#1}\fi
+% === fin selección ===
 
 \begin{document}
 
 \vspace*{-2cm}
 Nombre:$\underline{\hspace{8.5cm}}$ Identificación: \hrulefill
 
-\begin{enumerate}
-
-% ===== Problemas del examen (en este orden) =====
-\item\label{item:ejemplo} Una piedra se suelta desde el reposo a una altura $h=\qty{20}{\m}$. Despreciando la fricción con el aire, calcule la rapidez con que llega al suelo. Tome $g=\qty{9.8}{\m/\s^2}$.
+\begin{exercise}[ID=ejemplo, subtitle={Caída libre}, tags={examen}, points=100]
+Una piedra se suelta desde el reposo a una altura $h=\qty{20}{\m}$. Despreciando la fricción con el aire, calcule la rapidez con que llega al suelo. Tome $g=\qty{9.8}{\m/\s^2}$.
 
 \vspace{4cm}
-
+\end{exercise}
 \begin{solution}
 Por conservación de la energía mecánica,
 \begin{align}
@@ -58,15 +93,11 @@ Por conservación de la energía mecánica,
 \end{align}
 \end{solution}
 
-\newpage
-% ===== Banco de problemas no seleccionados =====
-\begin{comment}
-\item\label{item:banco-ejemplo} Problema del banco: no aparece en el examen.
+\begin{exercise}[ID=banco-ejemplo, tags={banco}]
+Problema del banco: no aparece en el examen.
+\end{exercise}
 \begin{solution}
 Solución del problema del banco.
 \end{solution}
-\end{comment}
-
-\end{enumerate}
 
 \end{document}

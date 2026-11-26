@@ -21,15 +21,6 @@
 \usepackage{longtable}
 \usepackage[nomessages]{fp}
 
-\usepackage{comment}
-\includecomment{solution}
-\includecomment{comment}
-\specialcomment{solution}
-{\begingroup \textbf{Solución: }}{\textbf{} \medskip \endgroup}
-% Para obtener solución comente y descomente las siguientes dos y una líneas
-\excludecomment{solution}
-\excludecomment{comment}
-%\renewcommand{\phantom}[1]{#1}
 
 % CONFIGURACIONES
 \pagestyle{empty} % Quitar números de página
@@ -42,6 +33,44 @@
 \newcommand{\khat}{\hat{k}}
 \renewcommand{\arraystretch}{1.9}
 
+% --- xsim: problemas, soluciones y banco (bloque estándar del curso) ---
+% Cada problema es un entorno exercise con su solution justo debajo:
+%   \begin{exercise}[ID=..., subtitle={...}, tags={...}, points=..., nuevapagina=true]
+% Solo se imprimen los problemas cuya etiqueta está en \xsimsetup{tags=...};
+% los demás forman el banco. Las partes de un problema que no se preguntan
+% van en \begin{comment}...\end{comment} dentro del problema.
+\usepackage{enumitem}
+\usepackage{xsim}
+% xsim relee cada problema desde un archivo: con babel en español, < y > activos
+% rompen opciones de TikZ como >=stealth. Se desactivan esos dos atajos.
+\AtBeginDocument{\shorthandoff{<>}}
+% comment: partes que no se preguntan; se descartan (no usa el paquete comment,
+% que no funciona dentro de los problemas de xsim)
+\usepackage{environ}
+\NewEnviron{comment}{}
+\DeclareExerciseProperty{nuevapagina}
+\newif\ifmostrarpuntos \mostrarpuntostrue   % \mostrarpuntosfalse: no imprime «(25 puntos)»
+% Cada problema se imprime como un ítem numerado de una lista, igual que con
+% \begin{enumerate}\item: las listas internas conservan sus etiquetas a), b)...
+\DeclareExerciseEnvironmentTemplate{parcial}
+  {\IfExercisePropertySetT{nuevapagina}{\clearpage}%
+   \begin{enumerate}[start=\GetExerciseProperty{counter}]
+   \item \IfExercisePropertySetT{subtitle}{\textbf{\GetExerciseProperty{subtitle}.} }%
+   \ifmostrarpuntos\IfExercisePropertySetT{points}{\textit{(\GetExerciseProperty{points}~puntos)} }\fi
+   \ignorespaces}
+  {\end{enumerate}}
+\DeclareExerciseEnvironmentTemplate{parcial-sol}
+  {\begin{enumerate}\item[]\textbf{Solución: }\ignorespaces}
+  {\end{enumerate}\medskip}
+\xsimsetup{exercise/template = parcial, solution/template = parcial-sol}
+% --- fin xsim ---
+% === Selección del examen (cambie solo estas líneas) ===
+\xsimsetup{tags={parcial3}}   % se imprimen solo los problemas con esta etiqueta
+\newif\ifsoluciones
+\solucionesfalse   % \solucionestrue: solucionario (también muestra lo que va en \phantom)
+\ifsoluciones\xsimsetup{solution/print=true}\renewcommand{\phantom}[1]{#1}\fi
+% === fin selección ===
+
 \begin{document}
 
 \vspace*{-2cm}
@@ -49,11 +78,8 @@ Nombre:$\underline{\hspace{8.5cm}}$ Identificación: \hrulefill
 
 \quad
 
-\begin{enumerate}
-
-% ===== Problemas del examen (en este orden) =====
-\begin{comment}  % problema comentado: radiación en LEP
-\item\label{item:lep} En el mismo túnel circular de $\qty{27}{\kilo\meter}$ donde ahora funciona el LHC acelerando protones, existía antes un acelerador de partículas, llamado LEP, que aceleraba electrones en la correspondiente órbita circular de $\qty{27}{\kilo\meter}$ a una energía de $\qty{100}{\giga\electronvolt}$, de manera que los electrones se movían a una velocidad muy cercana a la velocidad de la luz, $c$. A estas escalas macroscópicas, el electrón sí se puede considerar una partícula y, por lo tanto, está sometido a pérdidas de energía por radiación de ondas electromagnéticas. La fórmula de Larmor para la potencia perdida por radiación, $P$, para una partícula relativista, viene corregida por el factor relativista $\gamma$ como
+\begin{exercise}[ID=lep, tags={banco}]
+En el mismo túnel circular de $\qty{27}{\kilo\meter}$ donde ahora funciona el LHC acelerando protones, existía antes un acelerador de partículas, llamado LEP, que aceleraba electrones en la correspondiente órbita circular de $\qty{27}{\kilo\meter}$ a una energía de $\qty{100}{\giga\electronvolt}$, de manera que los electrones se movían a una velocidad muy cercana a la velocidad de la luz, $c$. A estas escalas macroscópicas, el electrón sí se puede considerar una partícula y, por lo tanto, está sometido a pérdidas de energía por radiación de ondas electromagnéticas. La fórmula de Larmor para la potencia perdida por radiación, $P$, para una partícula relativista, viene corregida por el factor relativista $\gamma$ como
 \begin{equation}
     P = \frac{2}{3} \frac{k e^2 a^2}{c^3}\gamma^4\,,
     \label{eq:larmor}
@@ -69,7 +95,7 @@ mientras se mueve por el túnel circular a una velocidad muy cercana a la de la 
 donde $R$ es el radio del círculo, calcule la potencia perdida por radiación en el acelerador LEP de $\qty{27}{\kilo\meter}$ de circunferencia. Exprese la respuesta en $\unit{\giga\electronvolt\per\second}$.
 
 Datos: $k=\qty{8.99e9}{\newton\meter\squared\per\coulomb\squared}$, $e=\qty{1.602e-19}{\coulomb}$, $c=\qty{3e8}{\meter\per\second}$, $m_e c^2=\qty{0.511}{\mega\electronvolt}$ y $\qty{1}{\giga\electronvolt}=\qty{1.602e-10}{\joule}$.
-
+\end{exercise}
 \begin{solution}
 \begin{align*}
     P =  &  \frac{2}{3} \frac{k e^2 c^4}{R^2c^3}\left(\frac{E}{m_ec^2}\right)^4\\
@@ -95,9 +121,8 @@ Entonces
 \end{align*}
 \end{solution}
 
-\newpage
-\end{comment}
-\item\label{item:solenoide} Diseñe un solenoide de longitud $L = \qty{0.5}{\meter}$ que genere en su interior un campo magnético $B = \qty{0.02}{\tesla}$ usando una corriente $I = \qty{5.0}{\ampere}$. ¿Cuántas vueltas $N$ se necesitan como mínimo?
+\begin{exercise}[ID=solenoide, tags={parcial3}, points=25]
+Diseñe un solenoide de longitud $L = \qty{0.5}{\meter}$ que genere en su interior un campo magnético $B = \qty{0.02}{\tesla}$ usando una corriente $I = \qty{5.0}{\ampere}$. ¿Cuántas vueltas $N$ se necesitan como mínimo?
 
 Ecuaciones: el campo dentro de un solenoide largo es
 \begin{equation}
@@ -106,7 +131,7 @@ Ecuaciones: el campo dentro de un solenoide largo es
 con $\mu_0 = 4\pi\times 10^{-7}\,\unit{\tesla\meter\per\ampere}$.
 
 \vspace{6cm}
-
+\end{exercise}
 \begin{solution}
 Despejando $N$:
 \begin{align}
@@ -115,9 +140,8 @@ Despejando $N$:
 Como no se puede dar media vuelta y con 1591 vueltas el campo queda un poco por debajo de $\qty{0.02}{\tesla}$, el mínimo es $N = 1592$ vueltas, es decir, unas $3183$ vueltas por metro.
 \end{solution}
 
-\newpage
-\begin{comment}  % problema comentado: corriente de desplazamiento
-\item\label{item:desplazamiento} \textbf{El aporte de Maxwell (corriente de desplazamiento):} Un condensador de placas paralelas de área $A = \qty{0.1}{\meter\squared}$ se está cargando rápidamente. Aunque no hay electrones cruzando el vacío entre las placas, el campo eléctrico $E$ está aumentando a un ritmo de $\Delta E/\Delta t = \qty{1.0e6}{\volt\per\meter\per\second}$. Calcule la ``corriente de desplazamiento'' equivalente entre las placas.
+\begin{exercise}[ID=desplazamiento, subtitle={El aporte de Maxwell (corriente de desplazamiento)}, tags={banco}]
+Un condensador de placas paralelas de área $A = \qty{0.1}{\meter\squared}$ se está cargando rápidamente. Aunque no hay electrones cruzando el vacío entre las placas, el campo eléctrico $E$ está aumentando a un ritmo de $\Delta E/\Delta t = \qty{1.0e6}{\volt\per\meter\per\second}$. Calcule la ``corriente de desplazamiento'' equivalente entre las placas.
 
 Ecuaciones: el cambio del flujo eléctrico es
 \begin{equation}
@@ -130,7 +154,7 @@ y la corriente de desplazamiento de Maxwell es
 con $\varepsilon_0 = \qty{8.85e-12}{\farad\per\meter}$.
 
 \vspace{6cm}
-
+\end{exercise}
 \begin{solution}
 \begin{align}
     I_d = \varepsilon_0 A\, \frac{\Delta E}{\Delta t} = (\qty{8.85e-12}{\farad\per\meter})(\qty{0.1}{\meter\squared})(\qty{1.0e6}{\volt\per\meter\per\second}) = \qty{8.85e-7}{\ampere}\,.
@@ -138,9 +162,8 @@ con $\varepsilon_0 = \qty{8.85e-12}{\farad\per\meter}$.
 Es una corriente de menos de un microamperio: entre las placas no pasa ninguna carga, pero el campo eléctrico que cambia produce un campo magnético, igual que lo haría esa corriente en un alambre. Las unidades cuadran porque $\unit{\farad\volt} = \unit{\coulomb}$ y $\unit{\coulomb\per\second} = \unit{\ampere}$.
 \end{solution}
 
-\newpage
-\end{comment}
-\item\label{item:montana-electrica} \textbf{Montaña rusa eléctrica.} Una esfera pequeña de masa $m=\qty{2.0}{\gram}$ y carga $q=+\qty{2.0}{\micro\coulomb}$ se mueve sin fricción por una vía que está sobre una mesa horizontal, dentro de una región donde hay un campo eléctrico uniforme de magnitud $E=\qty{5.0e3}{\newton\per\coulomb}$. La figura muestra la vía vista desde arriba: el campo apunta hacia abajo en la figura. La esfera parte del reposo en $A$. Como la mesa es horizontal, el peso no influye en el movimiento.
+\begin{exercise}[ID=montana-electrica, subtitle={Montaña rusa eléctrica}, tags={parcial3}, points=25, nuevapagina=true]
+Una esfera pequeña de masa $m=\qty{2.0}{\gram}$ y carga $q=+\qty{2.0}{\micro\coulomb}$ se mueve sin fricción por una vía que está sobre una mesa horizontal, dentro de una región donde hay un campo eléctrico uniforme de magnitud $E=\qty{5.0e3}{\newton\per\coulomb}$. La figura muestra la vía vista desde arriba: el campo apunta hacia abajo en la figura. La esfera parte del reposo en $A$. Como la mesa es horizontal, el peso no influye en el movimiento.
 
 Ecuaciones: la \textbf{línea de altura cero} es la recta punteada que pasa por $B$, y las distancias $y$ se miden desde ella \textbf{en contra del campo} (hacia arriba en la figura). La \textbf{energía potencial eléctrica} de la esfera a una distancia $y$ de esa recta es $U = qEy$, de modo que $U = 0$ sobre la línea de altura cero (es la versión eléctrica de $U = mgh$); la \textbf{energía cinética} es $K = \tfrac{1}{2} m v^2$, y sin fricción la energía mecánica $K + U$ se conserva.
 
@@ -178,7 +201,7 @@ Ecuaciones: la \textbf{línea de altura cero} es la recta punteada que pasa por 
     \item ¿Llega la esfera hasta $D$, a $\qty{22}{\centi\meter}$? ¿Hasta qué distancia de la línea de altura cero puede llegar?
     \item Si se repite el experimento con una esfera del doble de masa y la misma carga, ¿con qué rapidez llega a $B$? Explique por qué, a diferencia de la montaña rusa con gravedad, aquí la masa no se cancela.
 \end{enumerate}
-
+\end{exercise}
 \begin{solution}
 \begin{enumerate}
     \item En $A$, $y_A = \qty{0.20}{\meter}$ y la esfera está en reposo:
@@ -206,8 +229,8 @@ Ecuaciones: la \textbf{línea de altura cero} es la recta punteada que pasa por 
 \end{enumerate}
 \end{solution}
 
-\newpage
-\item\label{item:balmer} \textbf{La línea roja del hidrógeno.} En el modelo de Bohr, las energías permitidas del electrón en el átomo de hidrógeno son
+\begin{exercise}[ID=balmer, subtitle={La línea roja del hidrógeno}, tags={parcial3}, points=25, nuevapagina=true]
+En el modelo de Bohr, las energías permitidas del electrón en el átomo de hidrógeno son
 \begin{equation}
     E_n = -\frac{\qty{13.6}{\electronvolt}}{n^2}\,, \qquad n = 1, 2, 3, \dots
 \end{equation}
@@ -225,7 +248,7 @@ con $h = \qty{4.136e-15}{\electronvolt\second}$ (constante de Planck) y $c = \qt
 
 \textit{Sugerencia para verificar la respuesta:} la luz visible va de unos $\qty{380}{\nano\meter}$ (violeta) a unos $\qty{750}{\nano\meter}$, y el rojo corresponde a longitudes de onda entre unos $\qty{620}{\nano\meter}$ y $\qty{750}{\nano\meter}$.
 \end{enumerate}
-
+\end{exercise}
 \begin{solution}
 \begin{enumerate}
     \item
@@ -250,8 +273,8 @@ con $h = \qty{4.136e-15}{\electronvolt\second}$ (constante de Planck) y $c = \qt
 \end{enumerate}
 \end{solution}
 
-\newpage
-\item\label{item:coulomb-nulo} \textbf{Punto de fuerza nula.} Dos cargas puntuales, $q_1 = +\qty{4.0}{\micro\coulomb}$ y $q_2 = +\qty{9.0}{\micro\coulomb}$, están fijas y separadas una distancia $d = \qty{10}{\centi\meter}$. La figura muestra las líneas del campo eléctrico que producen. Se busca el punto, sobre la línea que une las cargas, donde una tercera carga $q_3$ no sentiría ninguna fuerza eléctrica. La recta punteada, perpendicular a la línea que une las cargas, marca ese punto a una distancia $x$ de $q_1$.
+\begin{exercise}[ID=coulomb-nulo, subtitle={Punto de fuerza nula}, tags={parcial3}, points=25, nuevapagina=true]
+Dos cargas puntuales, $q_1 = +\qty{4.0}{\micro\coulomb}$ y $q_2 = +\qty{9.0}{\micro\coulomb}$, están fijas y separadas una distancia $d = \qty{10}{\centi\meter}$. La figura muestra las líneas del campo eléctrico que producen. Se busca el punto, sobre la línea que une las cargas, donde una tercera carga $q_3$ no sentiría ninguna fuerza eléctrica. La recta punteada, perpendicular a la línea que une las cargas, marca ese punto a una distancia $x$ de $q_1$.
 
 Ecuaciones: la magnitud de la fuerza eléctrica entre dos cargas puntuales separadas una distancia $r$ es la ley de Coulomb,
 \begin{equation}
@@ -313,7 +336,7 @@ con $k = \qty{8.99e9}{\newton\meter\squared\per\coulomb\squared}$.
     \item Igualando las dos fuerzas, encuentre $x$.
     \item ¿Cambia la respuesta si $q_3$ es negativa o tiene otro valor? Explique.
 \end{enumerate}
-
+\end{exercise}
 \begin{solution}
 \begin{enumerate}
     \item Con $q_3$ a una distancia $x$ de $q_1$ y $d - x$ de $q_2$:
@@ -332,10 +355,9 @@ con $k = \qty{8.99e9}{\newton\meter\squared\per\coulomb\squared}$.
 \end{enumerate}
 \end{solution}
 
-% ===== Banco de problemas no seleccionados: comentados =====
-\begin{comment}
-\item\label{item:lep-vuelta} Calcular la energía perdida por radiación en una vuelta, teniendo en cuenta que el electrón se mueve a la velocidad de la luz. Expresar la respuesta en $\unit{\giga\electronvolt}$.
-
+\begin{exercise}[ID=lep-vuelta, tags={banco}]
+Calcular la energía perdida por radiación en una vuelta, teniendo en cuenta que el electrón se mueve a la velocidad de la luz. Expresar la respuesta en $\unit{\giga\electronvolt}$.
+\end{exercise}
 \begin{solution}
 \begin{align*}
     \frac{E_{\text{perdida}}}{T} =& P \\
@@ -349,8 +371,9 @@ Usando la ecuación para $P$
 \end{align*}
 \end{solution}
 
-\item\label{item:lep-max} Asumiendo que la energía suministrada a un electrón por vuelta es de $\qty{3.6}{\giga\electronvolt}$ en LEP, calcular la energía máxima a la que se puede acelerar el electrón en dicho acelerador, tal que la energía suministrada para acelerar el electrón durante una vuelta sea igual a la energía perdida por radiación en esa vuelta.
-
+\begin{exercise}[ID=lep-max, tags={banco}]
+Asumiendo que la energía suministrada a un electrón por vuelta es de $\qty{3.6}{\giga\electronvolt}$ en LEP, calcular la energía máxima a la que se puede acelerar el electrón en dicho acelerador, tal que la energía suministrada para acelerar el electrón durante una vuelta sea igual a la energía perdida por radiación en esa vuelta.
+\end{exercise}
 \begin{solution}
 En este caso
 \begin{align*}
@@ -404,8 +427,9 @@ por rayo, para una energía de centro de masa máxima de unos $\qty{440}{\giga\e
 En el mismo sitio del CERN, donde funciona el LHC y se encontraba LEP, se planea construir un nuevo acelerador de $\qty{90.7}{\kilo\meter}$ llamado Future Circular Collider (FCC-ee), \url{https://home.cern/science/accelerators/future-circular-collider}, que tendrá una energía máxima de centro de masa de $\qty{370}{\giga\electronvolt}$, suficiente no solo para producir el Higgs, sino también pares top-antitop, cada uno con una masa de $\qty{173}{\giga\electronvolt}/c^2$.
 \end{solution}
 
-\item\label{item:lep-proton} Teniendo en cuenta que un protón tiene la misma carga, $e$, explique por qué el protón se puede acelerar a energías más altas en un acelerador de partículas de la misma circunferencia de $\qty{27}{\kilo\meter}$.
-
+\begin{exercise}[ID=lep-proton, tags={banco}]
+Teniendo en cuenta que un protón tiene la misma carga, $e$, explique por qué el protón se puede acelerar a energías más altas en un acelerador de partículas de la misma circunferencia de $\qty{27}{\kilo\meter}$.
+\end{exercise}
 \begin{solution}
 De
 \begin{align*}
@@ -421,8 +445,5 @@ La energía perdida por radiación para protones, $E^p_{\text{perdida}}$, es por
 \end{align*}
 menor.
 \end{solution}
-\end{comment}
-
-\end{enumerate}
 
 \end{document}
