@@ -77,9 +77,8 @@ Todos los problemas de los exámenes, con sus soluciones, se deben sincronizar
 con el tiempo con las notas de clase (`main.tex` del repositorio
 `restrepo/Derivaci-n-de-las-transformaciones-de-Lorentz`, sincronizado con
 Overleaf): cada problema como ejercicio del capítulo que corresponde y su
-solución en el apéndice de soluciones. Cuando se agregue o cambie un problema
-del banco, ofrece llevarlo también a las notas, con las convenciones LaTeX del
-libro.
+solución en el apéndice de soluciones. Esa sincronización se hace solo cuando
+el profesor la pida explícitamente; no la ofrezcas por tu cuenta.
 
 ## Convenciones del curso
 

@@ -82,5 +82,4 @@ En `--ids`, la coma separa problemas de la misma página y `|` empieza una pági
   - En español, babel activa `<` y `>`, y eso rompía opciones de TikZ como `>=stealth`; el bloque desactiva esos atajos.
   - El paquete `comment` no funciona dentro de un `exercise`, así que el bloque define `comment` con `environ`.
   - No quites esas líneas.
-- **Notas de clase.** Con el tiempo, todos los problemas y soluciones del banco se sincronizarán con las notas de clase (`restrepo/Derivaci-n-de-las-transformaciones-de-Lorentz`): cuando agregues o cambies un problema, ofrece llevarlo también al capítulo correspondiente y su solución al apéndice.
 - **Privacidad.** Los problemas y soluciones son públicos; los datos de los estudiantes nunca se suben.
