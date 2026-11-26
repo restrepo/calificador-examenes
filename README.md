@@ -98,8 +98,10 @@ Requisitos para construir y verificar: Python 3, `npm` (descarga KaTeX
 ## Privacidad
 
 Aquí no se suben fotos de exámenes resueltos, notas, nombres, correos ni
-números de identificación de estudiantes. Como el repositorio guarda las
-soluciones de los exámenes, debe ser **privado**.
+números de identificación de estudiantes. El repositorio es **público**: los
+problemas y sus soluciones no son reservados, y con el tiempo se sincronizarán
+con las notas de clase (`restrepo/Derivaci-n-de-las-transformaciones-de-Lorentz`).
+Lo único que no se publica nunca son los datos de los estudiantes.
 
 ## Relacionado
 

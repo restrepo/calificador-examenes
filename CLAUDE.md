@@ -67,8 +67,19 @@ repositorio:
   de estudiantes, notas, listas de nombres, correos ni números de
   identificación. `.gitignore` bloquea los formatos habituales; si algo así
   aparece en `git status`, no lo agregues.
-- El repositorio guarda exámenes con soluciones: mantenlo **privado**. Los
-  estudiantes no lo necesitan; usan el enlace `#estudiante` del artefacto.
+- El repositorio es **público** por decisión del profesor: los problemas y sus
+  soluciones no son reservados. Lo que nunca se publica son los datos de los
+  estudiantes (punto anterior).
+
+## Banco de problemas y notas de clase
+
+Todos los problemas de los exámenes, con sus soluciones, se deben sincronizar
+con el tiempo con las notas de clase (`main.tex` del repositorio
+`restrepo/Derivaci-n-de-las-transformaciones-de-Lorentz`, sincronizado con
+Overleaf): cada problema como ejercicio del capítulo que corresponde y su
+solución en el apéndice de soluciones. Cuando se agregue o cambie un problema
+del banco, ofrece llevarlo también a las notas, con las convenciones LaTeX del
+libro.
 
 ## Convenciones del curso
 
@@ -94,7 +105,7 @@ repositorio:
 - Si cambió `calificador-parcial`, copia la carpeta a `claude-kit/skills/calificador-parcial/`
   del repositorio público `restrepo/fundamentacion_en_fisica` y reempaquétala allí
   (`python3 -B claude-kit/empaquetar_skills.py`): es la copia de respaldo para los
-  chats sin acceso a este repositorio privado.
+  chats que no cargan este repositorio.
 - `plantilla/examen.tex` y el `main.tex` de `restrepo/exam_template` (la
   plantilla de Overleaf) son el mismo archivo: si cambia uno, copia el otro.
 - Nada de `__pycache__` en el repositorio (usa `python3 -B`).

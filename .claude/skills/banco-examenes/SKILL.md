@@ -19,7 +19,7 @@ Trabaja sobre el repositorio `restrepo/calificador-examenes`: cada examen vive e
 | `parcial-2-2025-2` (dinámica newtoniana) | `restrepo/Fundamentacion_en_Fisica_Parcial_2_2025-2` | `parcial2` |
 | `parcial-3-2025-2` (electromagnetismo) | `restrepo/FF_examen3` | `parcial3` |
 
-Si no estás dentro de un clon de ese repositorio, clónalo primero (es privado; con Claude Code agrégalo a la sesión) y trabaja desde su raíz:
+Si no estás dentro de un clon de ese repositorio, clónalo primero (es público) y trabaja desde su raíz:
 
 ```bash
 git clone --depth 1 https://github.com/restrepo/calificador-examenes /tmp/ce && cd /tmp/ce
@@ -82,4 +82,5 @@ En `--ids`, la coma separa problemas de la misma página y `|` empieza una pági
   - En español, babel activa `<` y `>`, y eso rompía opciones de TikZ como `>=stealth`; el bloque desactiva esos atajos.
   - El paquete `comment` no funciona dentro de un `exercise`, así que el bloque define `comment` con `environ`.
   - No quites esas líneas.
-- **Privacidad.** Los exámenes con soluciones no se suben a repositorios públicos. Los PDF del banco son para el profesor.
+- **Notas de clase.** Con el tiempo, todos los problemas y soluciones del banco se sincronizarán con las notas de clase (`restrepo/Derivaci-n-de-las-transformaciones-de-Lorentz`): cuando agregues o cambies un problema, ofrece llevarlo también al capítulo correspondiente y su solución al apéndice.
+- **Privacidad.** Los problemas y soluciones son públicos; los datos de los estudiantes nunca se suben.
