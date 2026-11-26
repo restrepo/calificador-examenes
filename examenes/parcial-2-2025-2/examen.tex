@@ -183,14 +183,6 @@ Una pelota de $\qty{0.5}{\kilo\g}$ se suelta desde el reposo a $\qty{10}{\m}$ de
     v_{\text{escape}} = \sqrt{\frac{2 G M}{R}}\,,
 \end{align*}
 donde $G=\qty{6.67e-11}{{N\cdot m^2}/{kg^2}}$.
-
-\begin{comment}
-\item Teniendo en cuenta que la velocidad orbital a una distancia $R_{\text{orbital}}$ desde el centro de dicho objeto es
-\begin{align*}
-    v_{\text{orbital}} = \sqrt{\frac{G M}{R_{\text{orbital}}}}\,,
-\end{align*}
-¿A qué distancia $R_{\text{orbital}}$, en términos de $R$, se puede obtener que la velocidad orbital sea la velocidad de la luz?. Basado en la respuesta,  determine si dicha órbita podría existir.
-\end{comment}
 \end{enumerate}
 
 \vspace{6cm}
@@ -202,14 +194,25 @@ a)
     R =& \frac{2GM}{c^2} = \frac{2\times\num{6.67e-11}\times\num{5.97e24}}{(\num{3e8})^2}\,\unit{\m} \approx \qty{8.9e-3}{\m}\,,
 \end{align*}
 es decir, unos $\qty{9}{\mm}$: toda la Tierra comprimida en una canica sería un agujero negro.
+\end{solution}
 
-\begin{comment}
-b)
+\begin{exercise}[ID=escape-orbital, subtitle={Órbita a la velocidad de la luz}, tags={banco}]
+Toda la masa de la Tierra, $M\approx \qty{5.97e24}{\kilo\g}$, se comprime en una esfera de radio $R$ tal que la velocidad de escape desde su superficie,
+\begin{align*}
+    v_{\text{escape}} = \sqrt{\frac{2 G M}{R}}\,,
+\end{align*}
+es igual a la velocidad de la luz, $c=\qty{3e8}{m/s}$ (con $G=\qty{6.67e-11}{{N\cdot m^2}/{kg^2}}$, resulta $R\approx\qty{9}{\mm}$). Teniendo en cuenta que la velocidad orbital a una distancia $R_{\text{orbital}}$ desde el centro de dicho objeto es
+\begin{align*}
+    v_{\text{orbital}} = \sqrt{\frac{G M}{R_{\text{orbital}}}}\,,
+\end{align*}
+¿A qué distancia $R_{\text{orbital}}$, en términos de $R$, se puede obtener que la velocidad orbital sea la velocidad de la luz? Con base en la respuesta, determine si dicha órbita podría existir.
+\end{exercise}
+\begin{solution}
 \begin{align*}
     \frac{2}{R} =&\frac{1}{R_{\text{orbital}}}\\
     R_{\text{orbital}} =& \frac{R}{2}
 \end{align*}
-Cómo la velocidad orbital es menor que la velocidad de escape, una velocidad orbital debe ser menor que la velocidad de la luz y así una órbita con la velocidad de la luz no puede existir. Asombrosamente en relatividad general si puede existir.
+Como la velocidad orbital es menor que la velocidad de escape, una velocidad orbital debe ser menor que la velocidad de la luz y así una órbita con la velocidad de la luz no puede existir. Asombrosamente en relatividad general sí puede existir.
 
 \subsubsection*{Paradoja Relativista: Cuando Orbitar es más Difícil que Escapar}
 
@@ -242,7 +245,6 @@ A $1.5$ veces el Radio de Schwarzschild, la pared del ``embudo'' es tan empinada
 
 \textbf{Conclusión:}
 La Relatividad General nos enseña que el espacio y el tiempo son maleables. Cerca de un objeto hipermasivo, el espacio está tan deformado que el concepto clásico de ``fuerza centrífuga'' nos traiciona. Este es el límite absoluto de la Dinámica Newtoniana que hemos estudiado: a partir de aquí, la inercia ya no te protege de la gravedad, sino que se convierte en tu propio peso.
-\end{comment}
 \end{solution}
 
 \begin{exercise}[ID=camion, tags={parcial2}, points=18]
