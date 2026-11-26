@@ -131,9 +131,12 @@ def fuentes_por_defecto():
 def cargar(fuentes):
     fuentes = fuentes or fuentes_por_defecto()
     pres, todos = [], []
+    global DIRS
+    DIRS = []
     for f in fuentes:
         pre, enc, ps, et = leer_examen(f)
         pres.append(pre)
+        DIRS.append(str(Path(f).resolve().parent))
         for p in ps:
             p['impreso'] = bool(set(x.strip() for x in p['op'].get('tags', '').split(',')) & set(x.strip() for x in et.split(',')))
         todos += ps
@@ -145,7 +148,7 @@ def cargar(fuentes):
     return pres, todos
 
 
-def preambulo_union(pres):
+def preambulo_union(pres, dirs=()):
     """Une los preámbulos: paquetes y macros sin repetir; quita los bloques xsim y de selección."""
     lineas, vistos, libs = [], set(), []
     clase = None
@@ -167,6 +170,12 @@ def preambulo_union(pres):
                 continue
             if s and not s.startswith('%') and s in vistos:
                 continue
+            mp = re.match(r'\\usepackage(?:\[[^]]*\])?\{([^}]*)\}', s)
+            if mp:
+                nombres = [x.strip() for x in mp.group(1).split(',')]
+                if all(('pkg:' + n) in vistos for n in nombres):
+                    continue
+                vistos.update('pkg:' + n for n in nombres)
             m = re.match(r'\\(?:re)?newcommand\{?(\\[A-Za-z]+)', s)
             if m and m.group(1) in vistos:
                 continue
@@ -176,6 +185,8 @@ def preambulo_union(pres):
                 vistos.add(s)
                 lineas.append(l)
     out = [clase or '\\documentclass[12pt, a4paper]{article}'] + lineas
+    if dirs:
+        out.append('\\graphicspath{' + ''.join('{' + d.rstrip('/') + '/}' for d in dirs) + '}')
     if libs:
         i = max((k for k, l in enumerate(out) if '{tikz}' in l), default=len(out) - 1)
         out.insert(i + 1, '\\usetikzlibrary{' + ', '.join(libs) + '}')
@@ -186,7 +197,7 @@ def compilar(tex):
     tex = Path(tex).resolve()
     for _ in range(2):
         r = subprocess.run(['pdflatex', '-interaction=nonstopmode', '-halt-on-error', tex.name],
-                           cwd=tex.parent, capture_output=True, text=True)
+                           cwd=tex.parent, capture_output=True, text=True, errors='replace')
     pdf = tex.with_suffix('.pdf')
     log = tex.with_suffix('.log').read_text(errors='ignore')
     errores = [l for l in log.splitlines() if l.startswith('!')]
@@ -222,13 +233,13 @@ def cmd_banco(a):
     pres, ps = cargar(a.fuentes)
     if a.tag:
         ps = [p for p in ps if a.tag in [x.strip() for x in p['op'].get('tags', '').split(',')]]
-    pre = preambulo_union(pres)
+    pre = preambulo_union(pres, DIRS)
     plantilla = r"""\DeclareExerciseProperty{origen}
 \DeclareExerciseEnvironmentTemplate{banco}
   {\par\bigskip\noindent\rule{\linewidth}{0.4pt}\par\nopagebreak\noindent
    \hfill{\small\ttfamily\GetExerciseProperty{origen}}\par\nopagebreak
    \begin{enumerate}[start=\GetExerciseProperty{counter}]
-   \item \IfExercisePropertySetT{subtitle}{\textbf{\GetExerciseProperty{subtitle}.} }\ignorespaces}
+   \item \cursosubtituloactual\ignorespaces}
   {\end{enumerate}}
 \xsimsetup{exercise/template=banco}
 """
@@ -282,7 +293,7 @@ def cmd_armar(a):
             if k > 0 and j == 0:
                 op['nuevapagina'] = 'true'
             elegidos.append((p, op))
-    pre = preambulo_union(pres)
+    pre = preambulo_union(pres, DIRS)
     enc = '\\vspace*{-2cm}\nNombre:$\\underline{\\hspace{8.5cm}}$ Identificación: \\hrulefill\n\n\\quad\n'
     if a.titulo:
         enc = f'\\begin{{center}}\\large\\bfseries {a.titulo}\\end{{center}}\n' + enc.replace('\\vspace*{-2cm}\n', '')

@@ -27,3 +27,6 @@ calificador*.html
 __pycache__/
 *.pyc
 *.xsim
+
+# Figuras de los enunciados (no son fotos de estudiantes)
+!examenes/*/foton.png

@@ -1,0 +1,355 @@
+\documentclass[12pt, a4paper]{article}
+
+% PAQUETES BÁSICOS
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath, amssymb} % Para matemáticas avanzadas y símbolos
+\usepackage{graphicx}       % Para incluir imágenes
+\usepackage[margin=2.5cm]{geometry} % Control de márgenes
+\usepackage{siunitx}
+\usepackage{cancel}
+\usepackage{tabularx}
+\usepackage{booktabs}
+
+% PAQUETES DE FORMATO
+\usepackage{enumitem}       % Para personalizar listas
+\usepackage{sectsty}        % Para dar estilo a los títulos de sección
+\usepackage{amsfonts}       % Para fuentes matemáticas
+\usepackage{tikz}           % Para dibujar gráficos y diagramas
+\usetikzlibrary{babel}
+\usepackage[nomessages]{fp}
+
+% CONFIGURACIONES
+\pagestyle{empty} % Quitar números de página
+\sectionfont{\centering\large\bfseries} % Centrar los títulos de sección
+\subsectionfont{\normalfont\bfseries}
+
+% Definición para vectores unitarios (i, j, k con sombrero)
+\newcommand{\ihat}{\hat{\imath}}
+\newcommand{\jhat}{\hat{\jmath}}
+\newcommand{\khat}{\hat{k}}
+\renewcommand{\arraystretch}{1.9}
+
+% --- xsim: problemas, soluciones y banco (bloque estándar del curso) ---
+% Cada problema es un entorno exercise con su solution justo debajo:
+%   \begin{exercise}[ID=..., subtitle={...}, tags={...}, points=..., nuevapagina=true]
+% Solo se imprimen los problemas cuya etiqueta está en \xsimsetup{tags=...};
+% los demás forman el banco. Las partes de un problema que no se preguntan
+% van en \begin{comment}...\end{comment} dentro del problema.
+\usepackage{enumitem}
+\usepackage{xsim}
+% xsim relee cada problema desde un archivo: con babel en español, < y > activos
+% rompen opciones de TikZ como >=stealth. Se desactivan esos dos atajos.
+\AtBeginDocument{\shorthandoff{<>}}
+% comment: partes que no se preguntan; se descartan (no usa el paquete comment,
+% que no funciona dentro de los problemas de xsim)
+\usepackage{environ}
+\NewEnviron{comment}{}
+\DeclareExerciseProperty{nuevapagina}
+\newif\ifmostrarpuntos \mostrarpuntostrue   % \mostrarpuntosfalse: no imprime «(25 puntos)»
+% Título del problema en negrita, con punto final salvo que termine en ? o !
+\ExplSyntaxOn
+\cs_new_protected:Npn \cursosubtitulo #1
+  {
+    \textbf{ #1
+      \str_case_e:nnF { \str_item:nn {#1} {-1} } { {?} {} {!} {} } {.}
+    }
+  }
+\cs_new_protected:Npn \cursosubtituloactual
+  { \GetExercisePropertyT {subtitle} { \cursosubtitulo {##1} ~ } }
+\ExplSyntaxOff
+% Cada problema se imprime como un ítem numerado de una lista, igual que con
+% \begin{enumerate}\item: las listas internas conservan sus etiquetas a), b)...
+\DeclareExerciseEnvironmentTemplate{parcial}
+  {\IfExercisePropertySetT{nuevapagina}{\clearpage}%
+   \begin{enumerate}[start=\GetExerciseProperty{counter}]
+   \item \cursosubtituloactual%
+   \ifmostrarpuntos\IfExercisePropertySetT{points}{\textit{(\GetExerciseProperty{points}~puntos)} }\fi
+   \ignorespaces}
+  {\end{enumerate}}
+\DeclareExerciseEnvironmentTemplate{parcial-sol}
+  {\begin{enumerate}\item[]\textbf{Solución: }\ignorespaces}
+  {\end{enumerate}\medskip}
+\xsimsetup{exercise/template = parcial, solution/template = parcial-sol}
+% --- fin xsim ---
+% === Selección del examen (cambie solo estas líneas) ===
+\xsimsetup{tags={parcial1}}   % se imprimen solo los problemas con esta etiqueta
+\newif\ifsoluciones
+\solucionesfalse   % \solucionestrue: solucionario (también muestra lo que va en \phantom)
+\ifsoluciones\xsimsetup{solution/print=true}\renewcommand{\phantom}[1]{#1}\fi
+% En el solucionario, las respuestas de la tabla de tiempos y longitudes
+% propios (marcadas con \color{black}) salen en rojo.
+\ifsoluciones\colorlet{black}{red}\fi
+% === fin selección ===
+
+\begin{document}
+
+\vspace*{-2cm}
+Nombre:$\underline{\hspace{8.5cm}}$ Identificación: \hrulefill
+
+\quad
+
+\begin{exercise}[ID=icecube, subtitle={IceCube en piscinas olímpicas}, tags={parcial1}]
+El \emph{Premio Nobel de Física 2026} fue otorgado a Francis Halzen
+(Universidad de Wisconsin--Madison) por sus contribuciones decisivas al
+\textbf{Observatorio de Neutrinos IceCube} y por el descubrimiento de
+neutrinos de alta energía de origen astrofísico. IceCube, terminado en
+2011 en el Polo Sur, convierte el hielo antártico en un detector de
+partículas, usando un
+cubo de hielo de aproximadamente \qty{1}{\kilo\metre} de lado, es decir,
+un volumen de \qty{1}{\cubic\kilo\metre}.
+
+Una piscina olímpica contiene unos \qty{2500}{\cubic\metre} de agua.
+¿Cuántas piscinas olímpicas caben en el volumen de hielo de IceCube?
+
+\textbf{Factor de conversión.}
+$\qty{1000}{\metre} = \qty{1}{\kilo\metre}$
+
+\vspace{6cm}
+\end{exercise}
+\begin{solution}
+Como $\qty{1}{\kilo\metre} = \qty{1000}{\metre}$, el factor de conversión
+debe elevarse al cubo, porque el volumen tiene tres dimensiones de longitud:
+\begin{equation*}
+  V = \qty{1}{\cubic\kilo\metre}
+      \left(\frac{\qty{1000}{\metre}}{\qty{1}{\kilo\metre}}\right)^{3}
+    = \qty{e9}{\cubic\metre} \,.
+\end{equation*}
+El número de piscinas olímpicas es entonces
+\begin{equation*}
+  N = \frac{\qty{e9}{\cubic\metre}}{\qty{2500}{\cubic\metre}}
+    = \num{4e5} \,.
+\end{equation*}
+En el hielo de IceCube caben unas \num{400000} piscinas olímpicas.
+\emph{Error frecuente:} usar el factor sin elevarlo al cubo da
+$V = \qty{1000}{\cubic\metre}$, ¡menos de la mitad de una sola piscina!
+\end{solution}
+
+\begin{exercise}[ID=dron, subtitle={Descomposición vectorial}, tags={parcial1}]
+Un dron despega volando en línea recta a una rapidez de $v=15 \text{ m/s}$ con un ángulo de elevación de $\theta = 60^\circ$ respecto a la horizontal. Encuentre las componentes rectangulares de su vector velocidad, $\boldsymbol{v} = (v_x, v_y)$.
+\end{exercise}
+\begin{solution}
+\begin{align*}
+     v_x =& v \cos 60^\circ =  15\cdot \frac{1}{2}\frac{\unit{m}}{\unit{s}}\\   
+     v_y =& v \sin 60^\circ = 15\cdot \frac{\sqrt{3}}{2}\frac{\unit{m}}{\unit{s}}\\
+     \boldsymbol{v} =& \frac{15}{2}\left(1,\sqrt{3}\right)\frac{\unit{m}}{\unit{s}} \\
+     \boldsymbol{v} \approx& (7.5,13)\unit{m/s}
+\end{align*}
+\end{solution}
+
+\begin{exercise}[ID=propio, subtitle={¿Tiempo propio o dilatado? ¿Longitud propia o contraída?}, tags={parcial1}, nuevapagina=true]
+Marque con una X en el cajón de tiempo si es
+ $\boxed{\text{propio}}$ o $\boxed{\text{dilatado}}$,
+ ó longitud $\boxed{\text{propia}}$ o $\boxed{\text{contraída}}$
+ según correspnda a cada enunciado
+ 
+\begin{center}
+\renewcommand{\arraystretch}{1.8}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}X  c c@{}}
+\toprule
+Los \qty{2.2}{\micro\second} de vida del muón medidos en su propio reposo.
+      & $\boxed{\color{black}\text{propio}}$ & $\boxed{\text{dilatado}}$  \\\hline
+Los \qty{15}{\kilo\metre} de atmósfera medidos desde la Tierra.
+      & $\boxed{\color{black}\text{propia}}$ & $\boxed{\text{contraída}}$  \\\hline
+Los $5.3$ años del viaje a Próxima Centauri según el control de misión.
+      & $\boxed{\text{propio}}$ & $\boxed{\color{black}\text{dilatado}}$  \\\hline
+Los \qty{50.0}{\micro\second} de viaje del muón medidos desde la Tierra.
+      & $\boxed{\text{propio}}$ & $\boxed{\color{black}\text{dilatado}}$  \\\hline
+Los \qty{670}{\metre} de atmósfera que mide el muón
+      & $\boxed{\text{propia}}$ & $\boxed{\color{black}\text{contraída}}$  \\\hline
+Los \qty{67}{\milli\metre}  de la pelota medidos por la hormiga que viaja en ella.
+      & $\boxed{\color{black}\text{propia}}$ & $\boxed{\text{contraída}}$  \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\end{exercise}
+\begin{solution}
+Las respuestas, en orden: propio (el muón está en reposo en su sistema); propia (la atmósfera está en reposo respecto a la Tierra); dilatado (el reloj de control de misión no viaja con la nave); dilatado (medido desde la Tierra, donde el muón se mueve); contraída (el muón ve moverse la atmósfera); propia (la hormiga está en reposo respecto a la pelota).
+\end{solution}
+
+\begin{exercise}[ID=foton, tags={parcial1}, nuevapagina=true]
+Al conductor de una camioneta \includegraphics[scale=0.08]{foton.png},
+ a la cual le está permitida el límite de velocidad máxima $c=\qty{3e8}{m/s}$ como se muestra en la figura;
+
+\begin{tikzpicture}[scale=0.52]
+
+    % --- ANILLO ROJO EXTERIOR ---
+    % Círculo rojo con borde más oscuro para darle relieve
+    \fill[red!85!black] (0,0) circle (2.2cm);
+    % Círculo interior blanco para crear la señal de prohibición/límite
+    \fill[white] (0,0) circle (1.75cm);
+
+    % --- TEXTO INTERIOR ---
+    % Palabra "max"
+    \node[black, font=\sffamily\bfseries\large] at (0, 0.95) {max};
+
+    % Valor de la velocidad "3 x 10^8"
+    % Usamos un nodo con fuente sans-serif negrita para imitar la señal
+    \node[black, font=\sffamily\bfseries\large] at (0, 0.15) {
+        %\fontsize{32}{38}\selectfont
+        $\text{3}\boldsymbol{\times}\text{10}^{\text{8}}$
+    };
+
+    % Unidad "m/s"
+    \node[black, font=\sffamily\bfseries\large] at (0, -0.85) {m/s};
+
+\end{tikzpicture}
+
+le ha llegado una fotomulta por cruzar un semáforo en rojo (frecuencia $\qty{450}{THz}$). El conductor asegura que vió la luz del semáforo en verde (frecuencia $\qty{550}{THz}$). ¿A qué velocidad debería ir el conductor hacia el semáforo, para que dicha afirmación sea cierta?.
+
+La fórmula del Efecto Doppler Relativista para una fuente en reposo y un observador que se acerca es:
+    \begin{equation*}
+        f_{\text{obs}} = f_0 \sqrt{\frac{1 + \beta}{1 - \beta}}%\,\,,
+    \end{equation*}
+    donde hemos definido $\beta = {v}/{c}$.
+\end{exercise}
+\begin{solution}
+Utilizamos la fórmula del Efecto Doppler Relativista para una fuente en reposo y un observador que se acerca:
+    \begin{equation}
+        f_{\text{obs}} = f_0 \sqrt{\frac{1 + \beta}{1 - \beta}},
+    \end{equation}
+    donde hemos definido $\beta = \frac{v}{c}$.
+    
+    Dividimos ambos lados entre $f_0$:
+    \begin{equation}
+        \frac{f_{\text{obs}}}{f_0} = \sqrt{\frac{1 + \beta}{1 - \beta}}.
+    \end{equation}
+    
+    Para despejar $\beta$, elevamos al cuadrado ambos lados de la ecuación:
+    \begin{equation}
+        \left(\frac{f_{\text{obs}}}{f_0}\right)^2 = \frac{1 + \beta}{1 - \beta}.
+    \end{equation}
+    
+    Multiplicamos por $(1 - \beta)$ a ambos lados:
+    \begin{equation}
+        \left(\frac{f_{\text{obs}}}{f_0}\right)^2 (1 - \beta) = 1 + \beta.
+    \end{equation}
+    
+    Expandimos el producto algebraico:
+    \begin{equation}
+        \left(\frac{f_{\text{obs}}}{f_0}\right)^2 - \left(\frac{f_{\text{obs}}}{f_0}\right)^2 \beta = 1 + \beta.
+    \end{equation}
+    
+    Agrupamos todos los términos que contienen a $\beta$ en el lado derecho y los independientes en el izquierdo:
+    \begin{equation}
+        \left(\frac{f_{\text{obs}}}{f_0}\right)^2 - 1 = \beta \left[ 1 + \left(\frac{f_{\text{obs}}}{f_0}\right)^2 \right].
+    \end{equation}
+    
+    Despejamos $\beta$ pasando el corchete a dividir:
+    \begin{equation}
+        \beta = \frac{\left(\frac{f_{\text{obs}}}{f_0}\right)^2 - 1}{\left(\frac{f_{\text{obs}}}{f_0}\right)^2 + 1}.
+        \label{eq:beta_fotomulta}
+    \end{equation}
+    
+    Sustituimos los valores numéricos de las frecuencias ($f_{\text{obs}} = 550 \text{ THz}$ y $f_0 = 450 \text{ THz}$):
+    \begin{enumerate}
+        \item Relación de frecuencias: $\frac{f_{\text{obs}}}{f_0} = \frac{550}{450} = \frac{55}{45} = \frac{11}{9} \approx 1.2222$.
+        \item Cuadrado de la relación: $\left(\frac{11}{9}\right)^2 = \frac{121}{81} \approx 1.4938$.
+    \end{enumerate}
+    Sustituimos este valor en la Ecuación (\ref{eq:beta_fotomulta}):
+    \begin{equation}
+        \beta = \frac{\frac{121}{81} - 1}{\frac{121}{81} + 1} = \frac{\frac{121 - 81}{81}}{\frac{121 + 81}{81}} = \frac{\frac{40}{81}}{\frac{202}{81}}.
+    \end{equation}
+    Los denominadores $81$ se cancelan algebraicamente:
+    \begin{equation}
+        \beta = \frac{40}{202} = \frac{20}{101} \approx 0.198.
+    \end{equation}
+    
+    Finalmente, como $\beta = \frac{v}{c}$, despejamos la velocidad $v$ multiplicando por $c$:
+    \begin{equation}
+        v = \beta c \approx 0.198c \approx 5.94 \times 10^7 \text{ m/s} \quad (\approx 213,840 \text{ km/h}).
+    \end{equation}
+    \textbf{Respuesta:} El conductor debería viajar a una velocidad de $v = 0.198c$ (aproximadamente el $20\%$ de la velocidad de la luz) \textbf{acercándose} al semáforo.
+\end{solution}
+
+% ===== Banco: problemas que no van en este examen =====
+
+\begin{exercise}[ID=kwh, subtitle={De kilovatios hora a gigaelectronvoltios}, tags={banco}]
+Convierta $\qty{0.25}{kWh}$ a $\unit{GeV}$,
+
+Donde Giga: $\unit{G}=10^9$;  $\qty{1}{eV} = \qty{1.60218e-19}{J}$;  $\qty{1}{kWh} =\qty{3600000}{J}$
+
+\vspace{10cm}
+\end{exercise}
+\begin{solution}
+\begin{align*}
+        \qty{0.25}{kWh}\frac{\qty{3600000}{J}}{\qty{1}{kWh}}\frac{\qty{1}{eV} }{\qty{1.60218e-19}{J}}
+        \frac{\unit{G}}{10^9}=\qty{5.62e+15}{GeV}\,.
+    \end{align*}
+\end{solution}
+
+\begin{exercise}[ID=presion, subtitle={Presión en el núcleo de la Tierra}, tags={banco}]
+La presión en el núcleo de la Tierra alcanza unos 364 GPa (Giga pascales, el prefijo Giga indica un factor de mil millones). 1 Bar equivale a $10^5$ Pa. Así, esta presión, expresada en Bares, es:
+    
+    \begin{tabular}{@{}lll@{}}
+        A. $3.64 \times 10^7$ & B. $3.64 \times 10^{11}$ & C. $3.64 \times 10^6$ \\
+        D. $3.64 \times 10^8$ & E. Ninguna de las anteriores \\
+    \end{tabular}
+\end{exercise}
+\begin{solution}
+\begin{align}
+        \qty{364}{GPa}\frac{\qty{1e9}{Pa}}{\unit{GPa}}\frac{\unit{Bar}}{\qty{1e5}{Pa}}=
+        \qty{364e4}{Bar} = \qty{3.64e6}{Bar}
+    \end{align}
+\end{solution}
+
+\begin{exercise}[ID=momento-velocidad, subtitle={Velocidad a partir del momento relativista}, tags={banco}]
+\begin{enumerate}
+    \item Encuentre el cuadrado de la velocidad a la que se mueve una partícula de masa $m$ a partir de su momento, partiendo de la ecuación
+\begin{align*}
+    p =\dfrac{m v}{\sqrt{1-\dfrac{v^2}{c^2}}}
+\end{align*}
+
+\noindent
+ \hspace{-1cm}\begin{tabular*}{0.95\textwidth}{l|c|p{9cm}}
+   \textbf{Paso} & \textbf{Ecuación}  & \textbf{Justificación} \\\hline
+1)     & $p =\dfrac{m v}{\sqrt{1-\dfrac{v^2}{c^2}}}$  & ecuación inicial.\\[20pt]\hline
+2) &\phantom{ $p^2  =\dfrac{m^2 v^2}{1-\dfrac{v^2}{c^2}} $}& Elevar ambos lados al cuadrado. \\[20pt]\hline
+3) &\phantom{ $p^2\left(1-\dfrac{v^2}{c^2}\right)  =m^2 v^2 $}& Multiplicar a ambos lados por $\left(1-\dfrac{v^2}{c^2}\right)$ \\[5pt]\hline
+4) &\phantom{ $p^2-\dfrac{p^2v^2}{c^2}  =m^2 v^2 $}& Expandir $p^2$ a \emph{ambos} términos del paréntesis en el lado izquierdo. \\[5pt]\hline
+5) &$  \dfrac{p^2v^2}{c^2} + m^2 v^2 = p^2 $& Sumar $\dfrac{p^2v^2}{c^2}$ a ambos lados de la igualdad y reorganizar la igualdad con los términos con $v^2$ a la izquierda. \\[5pt]\hline
+6) &\phantom{ $v^2\left(\dfrac{p^2}{c^2} + m^2\right)= p^2 $}& Factorizar $v^2$. \\[5pt]\hline
+7) &\phantom{ $v^2=\dfrac{p^2}{m^2 + \dfrac{p^2}{c^2}}  $}& Dividir por $\left(\dfrac{p^2}{c^2} + m^2\right)$ a ambos lados de la igualdad. \\[20pt]\hline
+\end{tabular*}
+\item ¿Bajo que condición se recupera el límite no relativista?
+\begin{align*}
+    v = \frac{p}{m}\,,
+\end{align*}
+\end{enumerate}
+\end{exercise}
+\begin{solution}
+Asumiendo que la dirección de $p$ es la misma que la de $v$, podemos ignorar la solución con signo menos, de modo que
+\begin{align*}
+    v=&\dfrac{p}{\sqrt{m^2 + \dfrac{p^2}{c^2}}}\\
+    =&\dfrac{p/m}{\sqrt{1 + \dfrac{p^2}{m^2c^2}}}\,.
+\end{align*}
+Es claro que en si hacemos $c\to \infty$
+\begin{align*}
+    v =& \frac{p}{m}\,.
+\end{align*}
+\end{solution}
+
+\begin{exercise}[ID=cuadrivector, subtitle={Norma del cuadrivector velocidad}, tags={banco}]
+Demuestre que el producto escalar de Lorentz del cuadrivector de velocidad 
+\begin{align}
+    v^\mu = \left(\gamma c, \gamma \boldsymbol{v}\right),
+\end{align}
+consigo mismo, es independiente de la velocidad del sistema de referencia inercial $v$
+
+NOTA:
+\begin{align}
+\gamma = \frac{1}{\sqrt{1-v^2/c^2}}    
+\end{align}
+\end{exercise}
+\begin{solution}
+\begin{align}
+        v^\mu\cdot v^\mu =& \gamma^2 c^2 -\gamma^2 v^2 \\
+                    =& \frac{1}{1-v^2/c^2}(c^2-v^2)\\
+                    =&\frac{\dfrac{1}{1}}{\dfrac{c^2-v^2}{c^2}}(c^2-v^2)\\
+                    =&\frac{c^2}{\cancel{c^2-v^2}}(\cancel{c^2-v^2})\\
+                    =& c^2\,.
+    \end{align}
+\end{solution}
+
+\end{document}

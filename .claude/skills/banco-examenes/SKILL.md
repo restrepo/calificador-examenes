@@ -16,6 +16,7 @@ Trabaja sobre el repositorio `restrepo/calificador-examenes`: cada examen vive e
 
 | Examen | Repositorio del examen | Etiqueta |
 |---|---|---|
+| `parcial-1-2025-2` (preliminares y relatividad especial) | `restrepo/Fundamentacion_en_Fisica_Parcial_1` | `parcial1` |
 | `parcial-2-2025-2` (dinámica newtoniana) | `restrepo/Fundamentacion_en_Fisica_Parcial_2_2025-2` | `parcial2` |
 | `parcial-3-2025-2` (electromagnetismo) | `restrepo/FF_examen3` | `parcial3` |
 

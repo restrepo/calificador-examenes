@@ -39,6 +39,7 @@ COMENZAR.md                       cómo arrancar desde un chat nuevo
   banco-examenes/                 banco de problemas (xsim): listar, PDF del banco, armar exámenes
 plantilla/examen.tex              plantilla de examen en xsim: banco de problemas y soluciones conmutables
 examenes/<examen>/                un examen: examen.tex, examen.json y su ficha README.md
+  parcial-1-2025-2/               Parcial 1, preliminares y relatividad especial
   parcial-2-2025-2/               Parcial 2, dinámica newtoniana
   parcial-3-2025-2/               Parcial 3, electromagnetismo
 scripts/nuevo_examen.py           crea la carpeta de un examen nuevo
