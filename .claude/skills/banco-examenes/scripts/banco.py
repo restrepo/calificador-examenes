@@ -92,7 +92,7 @@ def leer_examen(ruta):
     t = Path(ruta).read_text(encoding='utf-8')
     pre, _, cuerpo = t.partition('\\begin{document}')
     cuerpo = cuerpo.rsplit('\\end{document}', 1)[0]
-    m = re.search(r'\\xsimsetup\{tags=\{([^}]*)\}\}', pre)
+    m = re.search(r'^[^%\n]*\\xsimsetup\{tags=\{([^}]*)\}\}', pre, re.M)
     etiqueta = m.group(1) if m else ''
     problemas = []
     pos = 0

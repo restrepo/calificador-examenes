@@ -48,6 +48,13 @@ dist/                             skills empaquetadas (.skill) para subir a clau
 
 ## Banco de problemas
 
+**Plantilla recomendada para exámenes nuevos:** el proyecto de Overleaf
+[Plantilla de examen (xsim)](https://www.overleaf.com/project/6b0862db0a86c5748e890b7f/share#9b7bf43e27cdfb83fce83ef8612a49fe7169d6c17608c4f7)
+sincronizado con el repositorio [`restrepo/exam_template`](https://github.com/restrepo/exam_template).
+Haga una copia del proyecto para cada examen nuevo («Copy project» en Overleaf) y
+escriba ahí los problemas en formato xsim. Es la misma plantilla que
+`plantilla/examen.tex`.
+
 Los exámenes están en formato [xsim](https://ctan.org/pkg/xsim): cada problema
 es un entorno `exercise` con su solución, su `ID`, sus puntos y una etiqueta
 (`tags`). El examen imprime solo los problemas con su etiqueta; los demás

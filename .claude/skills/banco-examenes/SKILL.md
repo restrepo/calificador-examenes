@@ -44,7 +44,7 @@ Cada problema es un entorno `exercise` con su `solution` justo debajo:
 - El bloque «Selección del examen» del preámbulo decide qué se imprime: `\xsimsetup{tags={parcial3}}` imprime solo los problemas con esa etiqueta. Los demás (`tags={banco}`) quedan guardados en el banco. Para mover un problema entre el examen y el banco se cambia solo su etiqueta.
 - `\solucionestrue` imprime el solucionario (y lo que va dentro de `\phantom`). `\mostrarpuntosfalse` oculta «(25 puntos)».
 - Las partes de un problema que no se preguntan van en `\begin{comment}…\end{comment}` dentro del problema.
-- El bloque estándar está en `assets/bloque-xsim.tex`; la plantilla de examen nuevo es `plantilla/examen.tex`.
+- El bloque estándar está en `assets/bloque-xsim.tex`. La plantilla de examen nuevo es `plantilla/examen.tex`, la misma del proyecto de Overleaf «Plantilla de examen (xsim)» (https://www.overleaf.com/project/6b0862db0a86c5748e890b7f/share#9b7bf43e27cdfb83fce83ef8612a49fe7169d6c17608c4f7), sincronizado con `restrepo/exam_template`. Para un examen nuevo en Overleaf, sugiere copiar ese proyecto y pegar ahí lo que produzca `armar`.
 
 ## El script
 

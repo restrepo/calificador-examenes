@@ -36,7 +36,10 @@ repositorio:
    plantilla, en formato xsim: cada problema es un `exercise` con `ID`, `tags`
    y `points`, y su `solution` debajo. Se imprimen los problemas con la etiqueta
    de `\xsimsetup{tags={…}}`; los demás (`tags={banco}`) son el banco. Para el
-   solucionario, `\solucionestrue`. Ver la skill `banco-examenes`.
+   solucionario, `\solucionestrue`. Ver la skill `banco-examenes`. Si el
+   profesor escribe el examen en Overleaf, sugiere partir del proyecto plantilla
+   («Plantilla de examen (xsim)»: https://www.overleaf.com/project/6b0862db0a86c5748e890b7f/share#9b7bf43e27cdfb83fce83ef8612a49fe7169d6c17608c4f7,
+   sincronizado con `restrepo/exam_template`), copiándolo para cada examen.
 3. **El JSON y el calificador.** Sigue la skill `calificador-parcial`
    (secciones 1 a 4) con `KIT=.claude/skills/calificador-parcial`:
    ```bash
@@ -92,4 +95,6 @@ repositorio:
   del repositorio público `restrepo/fundamentacion_en_fisica` y reempaquétala allí
   (`python3 -B claude-kit/empaquetar_skills.py`): es la copia de respaldo para los
   chats sin acceso a este repositorio privado.
+- `plantilla/examen.tex` y el `main.tex` de `restrepo/exam_template` (la
+  plantilla de Overleaf) son el mismo archivo: si cambia uno, copia el otro.
 - Nada de `__pycache__` en el repositorio (usa `python3 -B`).
